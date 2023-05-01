@@ -25,7 +25,7 @@ public class LoginThread implements Runnable {
     @Override
     public void run() {
         synchronized (this) {
-            while (running) {
+            while (!welcomeSocket.isClosed()) {
                 OutputStream outputStream;
                 response = false ;
                 try {
@@ -39,7 +39,8 @@ public class LoginThread implements Runnable {
                 try {
                     System.out.println(response);
                     String answer = response? "success":"failed";
-                    outputStream.write(answer.getBytes());                } catch (IOException e) {
+                    outputStream.write(answer.getBytes());
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
