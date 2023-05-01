@@ -65,7 +65,4 @@ public class LoginThread implements Runnable {
         }
         return response ;
     }
-
-
-
 }
