@@ -14,6 +14,7 @@ public class LoginThread implements Runnable {
     LoginThread() throws IOException {
         welcomeSocket = new ServerSocket(6789);
         running = true ;
+        // test
     }
 
     @Override
