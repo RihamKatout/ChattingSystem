@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class UDPServerThread implements Runnable{
     private static DatagramSocket socket;
-    private static DatagramPacket packet;
-    private static byte[] buffer;
+    private static DatagramPacket packet, sendPacket;
+    private static byte[] buffer, sendData;
     private static ArrayList<chat>chats;
     private static int port = 9876;
     private static boolean running;
@@ -22,6 +22,7 @@ public class UDPServerThread implements Runnable{
         buffer = new byte[1024];
         packet = new DatagramPacket(buffer, buffer.length);
         chats = new ArrayList<chat>();
+        sendData = new byte[1024];
     }
     @Override
     public void run(){
@@ -46,7 +47,13 @@ public class UDPServerThread implements Runnable{
                 }
 
                 addMessage(chats.get(i), input[1]);
-
+                sendData = UDPClientThread.getMyUsername().getBytes();
+                sendPacket=new DatagramPacket(sendData, sendData.length, friendIPAddress, friendPort);
+                try {
+                    socket.send(sendPacket);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
