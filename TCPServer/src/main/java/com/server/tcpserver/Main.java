@@ -17,9 +17,6 @@ public class Main extends Application  {
         stage.show();
     }
     public  static void main(String[] args) throws IOException, InterruptedException {
-//        OnlineStatus.newOnlineUser(new String( "amjadmain, ,192.168.1.10,6789"));
-//        OnlineStatus.newOnlineUser(new String( "amjadtest, ,192.168.1.25,6789"));
-//        OnlineStatus.updateClients();
         LoginThread loginThread = new LoginThread();
         Thread threadLogin = new Thread(loginThread);
         threadLogin.start();
@@ -27,6 +24,4 @@ public class Main extends Application  {
         threadLogin.interrupt();
         System.exit(0);
     }
-
-
 }

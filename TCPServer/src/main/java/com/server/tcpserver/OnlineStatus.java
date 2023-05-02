@@ -1,48 +1,47 @@
 package com.server.tcpserver;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
 
-public class OnlineStatus{
-    static  Set<String> onlineUsers = new HashSet<>();
+public class OnlineStatus {
+    private static Set<String> onlineUsers = new HashSet<>();
 
-    static void updateClients() throws IOException {
-        for (String user : onlineUsers) {
-            System.out.println(user);
+    private ServerSocket welcomeSocket ;
+    private String clientLoginInfo;
+    private Socket connectionSocket;
+    private BufferedReader inFromClient;
+    private DataOutputStream outToClient;
 
-            String userData[] = user.split(",");
-//            userData[0]; // name
-//            userData[1]; // email
-//            userData[2]; // ip
-//            userData[3]; // port
-            String sentenceFromClient;
-            String responseFromServer;
-            Socket clientSocket = new Socket(userData[2], Integer.parseInt(userData[3])); // different port
-            DataOutputStream outToServer =
-                    new DataOutputStream(clientSocket.getOutputStream());
-            BufferedReader inFromServer =
-                    new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            sentenceFromClient = "";
-            for (String onlineUsers : onlineUsers){
-                if(onlineUsers.equals(user))
+     public static void updateClients() throws IOException {
+         for (String user : onlineUsers) {
+             String allOnlineUsers = "online users :  ";
+             for (String online : onlineUsers) {
+                if(online.equals(user)) {
                     continue;
-                sentenceFromClient += user +'$';
+                }
+                allOnlineUsers += online +'$';
             }
-            System.out.println("FROM SERVER: " + sentenceFromClient);
-            outToServer.writeBytes(sentenceFromClient + '\n');
-          responseFromServer = inFromServer.readLine();
-            clientSocket.close();
+            String userData[] = user.split(",");
+            Socket clientSocketStatus = new Socket("192.168.1.5", Integer.parseInt(userData[3]));
+            OutputStream outputStreamStatus = clientSocketStatus.getOutputStream();
+            InputStream inputStreamStatus = clientSocketStatus.getInputStream();
+            outputStreamStatus.write(allOnlineUsers.getBytes());
+            System.out.println( HelperFunctions.reader(inputStreamStatus));
+            clientSocketStatus.close();
         }
 
     }
     public static void newOnlineUser(String userDetails) throws IOException {
         onlineUsers.add(userDetails);
-//        updateClients();
-
+        updateClients();
     }
+    public static void logOutUser(String userDetails) throws IOException {
+        onlineUsers.remove(userDetails);
+        updateClients();
+    }
+
+
 }

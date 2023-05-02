@@ -1,2 +1,2 @@
-amjadmain, ,192.168.1.10,6789
-amjadtest, ,192.168.1.25,6789
+amjadmain,amjad1234,192.168.1.10,1234
+amjadtest,amjad1234,192.168.1.25,1234

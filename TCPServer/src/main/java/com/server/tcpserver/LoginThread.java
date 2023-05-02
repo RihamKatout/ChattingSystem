@@ -10,17 +10,9 @@ public class LoginThread implements Runnable {
     private Socket connectionSocket;
     private BufferedReader inFromClient;
     private DataOutputStream outToClient;
-    private Boolean running ,response;
+    private Boolean response;
     LoginThread() throws IOException {
         welcomeSocket = new ServerSocket(6789);
-        running = true ;
-        // test
-    }
-    private static String reader(InputStream inputStream) throws IOException {
-        byte[] buffer = new byte[1024];
-        int bytesRead = inputStream.read(buffer);
-        String response = new String(buffer, 0, bytesRead);
-        return response;
     }
     @Override
     public void run() {
@@ -28,17 +20,20 @@ public class LoginThread implements Runnable {
             while (!welcomeSocket.isClosed()) {
                 OutputStream outputStream;
                 response = false ;
+                String message = "";
                 try {
                     connectionSocket = welcomeSocket.accept();
+                    System.out.println("accepeted");
                     outputStream = connectionSocket.getOutputStream();
                     InputStream inputStream = connectionSocket.getInputStream();
-                    response = Login(reader(inputStream));
+                    message = HelperFunctions.reader(inputStream) ;
+                    response = Login(message);
+                    System.out.println(response);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 try {
-                    System.out.println(response);
-                    String answer = response? "success":"failed";
+                    String answer = response ? "success":"failed";
                     outputStream.write(answer.getBytes());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -56,10 +51,11 @@ public class LoginThread implements Runnable {
             reader = new BufferedReader(new FileReader("src/main/resources/DataBase.txt"));
             String line = reader.readLine();
             while (line != null) {
-                System.out.println(line);
                 String dataBase[] = line.split(",");
                 if ((dataBase[0]).equals(clientValues[0])   ) //validating name and password
                 {
+                    System.out.println("hi "+line);
+                    OnlineStatus.newOnlineUser(line);
                     response = true;
                     break;
                 }

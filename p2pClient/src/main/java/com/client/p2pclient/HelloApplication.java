@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HelloApplication extends Application implements Initializable {
+public class HelloApplication extends Application  {
     public static ServerHelper serverHelper;
 
     @Override
@@ -31,16 +31,17 @@ public class HelloApplication extends Application implements Initializable {
 //        String sentenceFromClient;
 //        String responseFromClient;
 //        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-
-      serverHelper.sendToServer(Request.MESSAGE_SENT,"amjad");
+        onlineStatusThread thread = new onlineStatusThread();
+        Thread onlineThread = new Thread(thread);
+        onlineThread.start();
+        serverHelper = new ServerHelper();
+        serverHelper.sendToServer(Request.LOG_IN,"amjadtest");
+        serverHelper.sendToServer(Request.LOG_IN,"amjadmain");
+//        System.out.println("test1");
+        System.out.println("test2");
+        launch();
+        onlineThread.interrupt();
+        System.exit(0);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            serverHelper = new ServerHelper() ;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

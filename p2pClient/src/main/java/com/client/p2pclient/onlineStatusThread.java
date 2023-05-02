@@ -12,7 +12,7 @@ public class onlineStatusThread implements Runnable {
     private DataOutputStream outToClient;
     private Boolean running ,response;
     onlineStatusThread() throws IOException {
-        welcomeSocket = new ServerSocket(6789);
+        welcomeSocket = new ServerSocket(1234);
         running = true ;
         // test
     }
@@ -20,24 +20,24 @@ public class onlineStatusThread implements Runnable {
     @Override
     public void run() {
         synchronized (this) {
-            while (running) {
-                response = false ;
+            while (!welcomeSocket.isClosed()) {
+                OutputStream outputStream;
                 try {
                     connectionSocket = welcomeSocket.accept();
-                    inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-                    outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-                    onlineUsers = inFromClient.readLine();
-//                    response = Login(clientLoginInfo);
+                    outputStream = connectionSocket.getOutputStream();
+                    InputStream inputStream = connectionSocket.getInputStream();
+//                    System.out.println("hello");
+                    String onlineUsers = ServerHelper.reader(inputStream);
+                    System.out.println(onlineUsers);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 try {
-                    System.out.println(response);
-                    outToClient.writeBytes(("Success") + '\n'); // it won't work without '\n' so just put it there
+                    String answer = "thanks";
+                    outputStream.write(answer.getBytes());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println(onlineUsers);
             }
         }
     }
