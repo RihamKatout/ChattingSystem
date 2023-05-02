@@ -1,0 +1,17 @@
+.nav-left{
+    -fx-background-color:#12004A;
+}
+
+.friends{
+    -fx-background-color: #FBFAFF;
+    -fx-border-style: solid none;
+    -fx-border-width: 2px;
+    -fx-border-color: #DBDBDB;
+}
+
+.server{
+    -fx-background-color: #FBFAFF;
+}
+.status{
+    -fx-background-color: #878787;
+}

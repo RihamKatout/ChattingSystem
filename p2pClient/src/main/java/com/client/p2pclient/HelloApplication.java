@@ -11,10 +11,11 @@ import java.net.Socket;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("messenger.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+        stage.setTitle("messenger");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
         //test
     }
@@ -26,6 +27,7 @@ public class HelloApplication extends Application {
     }
     public static void main(String[] args) throws IOException {
 
+        launch();
 //        String sentenceFromClient;
 //        String responseFromClient;
 //        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
