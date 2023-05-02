@@ -1,13 +1,26 @@
 package com.client.p2pclient;
 
 public class user {
-    private String username, IP, port;
+    private String username, IP;
+    private int port;
 
+    user(){
+        IP = username = null;
+        port = 0;
+    }
+    user(String IP, int port){
+        this.IP = IP;
+        this.port = port;
+    }
+    user(String IP, int port, String username){
+        this(IP, port);
+        this.username = username;
+    }
     public String getIP() {
         return IP;
     }
 
-    public String getPort() {
+    public int getPort() {
         return port;
     }
 
@@ -19,7 +32,7 @@ public class user {
         this.IP = IP;
     }
 
-    public void setPort(String port) {
+    public void setPort(int port) {
         this.port = port;
     }
 
@@ -28,7 +41,7 @@ public class user {
     }
 
     public boolean equals(user user2) {
-        return IP.equals(user2.getIP()) && port.equals(user2.getPort());
+        return IP.equals(user2.getIP()) && port==(user2.getPort());
     }
 
 }
