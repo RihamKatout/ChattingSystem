@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="1060.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.p2pclient.GUIController">
+   <children>
+      <VBox layoutX="882.0" layoutY="49.0" prefHeight="762.0" prefWidth="993.0" style="-fx-background-color: #5534;" />
+      <TextArea fx:id="messageBox" layoutX="881.0" layoutY="828.0" prefHeight="152.0" prefWidth="994.0" promptText="enter text here">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </TextArea>
+      <VBox layoutX="43.0" layoutY="45.0" prefHeight="826.0" prefWidth="416.0" style="-fx-background-color: #5534;" />
+      <Label layoutX="468.0" layoutY="54.0" text="TCP Server IP">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField layoutX="628.0" layoutY="49.0" prefHeight="0.0" prefWidth="243.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="473.0" layoutY="236.0" text="Available interface">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TitledPane animated="false" layoutX="472.0" layoutY="270.0" prefHeight="16.0" prefWidth="305.0" text="WI-Fi: 192.168.1.112">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TitledPane>
+      <Label layoutX="468.0" layoutY="112.0" text="TCP Server port">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField layoutX="628.0" layoutY="107.0" prefHeight="6.0" prefWidth="243.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="473.0" layoutY="391.0" text="Local IP">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField layoutX="628.0" layoutY="386.0" prefHeight="44.0" prefWidth="243.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="473.0" layoutY="448.0" text="Local port">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="472.0" layoutY="553.0" text="Remote IP">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="472.0" layoutY="610.0" text="Remote port">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Button layoutX="1827.0" layoutY="987.0" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="45.0" prefWidth="81.0" text="Send">
+         <font>
+            <Font size="21.0" />
+         </font></Button>
+      <Label layoutX="44.0" layoutY="974.0" prefHeight="62.0" prefWidth="108.0" text="Status">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField layoutX="143.0" layoutY="987.0" prefHeight="27.0" prefWidth="903.0">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <Label layoutX="166.0" layoutY="2.0" text="Online users">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="44.0" layoutY="911.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Logout">
+         <font>
+            <Font size="23.0" />
+         </font></Button>
+      <TextField layoutX="628.0" layoutY="443.0" prefHeight="44.0" prefWidth="243.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="628.0" layoutY="548.0" prefHeight="44.0" prefWidth="243.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="628.0" layoutY="605.0" prefHeight="44.0" prefWidth="243.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Button layoutX="185.0" layoutY="911.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Test">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

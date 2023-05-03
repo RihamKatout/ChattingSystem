@@ -6,13 +6,13 @@ import java.util.ArrayList;
 public class chat {
     private user friend;
     private ArrayList<String> sentMessages, receivedMessages;
-    private ArrayList<boolean>sentOrReceived; //true => sent, false => received
+    private ArrayList<Boolean>sentOrReceived; //true => sent, false => received
 
     chat(){
         friend = new user();
         sentMessages = new ArrayList<String>();
         receivedMessages = new ArrayList<String>();
-        sentOrReceived = new ArrayList<boolean>();
+        sentOrReceived = new ArrayList<Boolean>();
     }
     chat(user friend){
         this();
@@ -31,7 +31,7 @@ public class chat {
         this.receivedMessages = receivedMessages;
     }
 
-    public void setSentOrReceived(ArrayList<boolean> sentOrReceived) {
+    public void setSentOrReceived(ArrayList<Boolean> sentOrReceived) {
         this.sentOrReceived = sentOrReceived;
     }
 
@@ -47,7 +47,7 @@ public class chat {
         return receivedMessages;
     }
 
-    public ArrayList<boolean> getSentOrReceived() {
+    public ArrayList<Boolean> getSentOrReceived() {
         return sentOrReceived;
     }
 

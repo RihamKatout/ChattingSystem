@@ -45,8 +45,11 @@ public class UDPServerThread implements Runnable{
                     //create a new chat
                     i = createChat(user2);
                 }
+                String message = input[1];
+                for(int t=2;t< input.length;t++)
+                    message+=input[t];
 
-                addMessage(chats.get(i), input[1]);
+                addMessage(chats.get(i), message);
                 sendData = UDPClientThread.getMyUsername().getBytes();
                 sendPacket=new DatagramPacket(sendData, sendData.length, friendIPAddress, friendPort);
                 try {
@@ -55,6 +58,7 @@ public class UDPServerThread implements Runnable{
                     throw new RuntimeException(e);
                 }
             }
+            socket.close();
         }
     }
 

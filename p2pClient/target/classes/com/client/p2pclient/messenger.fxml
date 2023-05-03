@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -15,10 +16,14 @@
    <children>
       <HBox prefHeight="1060.0" prefWidth="1920.0">
          <children>
-            <VBox prefHeight="1060.0" prefWidth="106.0" styleClass="nav-left" stylesheets="style.css" />
+            <VBox prefHeight="1060.0" prefWidth="106.0" styleClass="nav-left">
+               <stylesheets>
+                  <URL value="@../../../../style.css" />
+                  <URL value="@style.css" />
+               </stylesheets></VBox>
             <VBox prefHeight="1060.0" prefWidth="1828.0">
                <children>
-                  <Label contentDisplay="CENTER" prefHeight="59.0" prefWidth="1871.0" styleClass="status" stylesheets="style.css" text="Label" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+                  <Label contentDisplay="CENTER" prefHeight="59.0" prefWidth="1871.0" styleClass="status" stylesheets="@../../../../style.css" text="Label" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -33,7 +38,7 @@
                      <children>
                         <VBox prefHeight="1004.0" prefWidth="452.0">
                            <children>
-                              <VBox fx:id="serverVBox" prefHeight="200.0" prefWidth="100.0" styleClass="server" stylesheets="style.css">
+                              <VBox fx:id="serverVBox" prefHeight="200.0" prefWidth="100.0" styleClass="server" stylesheets="@../../../../style.css">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                        <children>
@@ -63,7 +68,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox fx:id="friendsVBox" prefHeight="804.0" prefWidth="446.0" styleClass="friends" stylesheets="style.css">
+                              <VBox fx:id="friendsVBox" prefHeight="804.0" prefWidth="446.0" styleClass="friends" stylesheets="@../../../../style.css">
                                  <children>
                                     <ScrollPane prefHeight="815.0" prefWidth="446.0">
                                       <content>
@@ -94,7 +99,7 @@
                               <HBox alignment="CENTER" prefHeight="122.0" prefWidth="1376.0" spacing="20.0" style="-fx-background-color: #9898;">
                                  <children>
                                     <TextArea prefHeight="85.0" prefWidth="1233.0" />
-                                    <Button mnemonicParsing="false" text="Button" />
+                                    <Button mnemonicParsing="false" onAction="#onSendButtonClick" text="send" />
                                  </children>
                                  <padding>
                                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />

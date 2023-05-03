@@ -99,7 +99,7 @@
                               <HBox alignment="CENTER" prefHeight="122.0" prefWidth="1376.0" spacing="20.0" style="-fx-background-color: #9898;">
                                  <children>
                                     <TextArea prefHeight="85.0" prefWidth="1233.0" />
-                                    <Button mnemonicParsing="false" text="Button" />
+                                    <Button mnemonicParsing="false" onAction="#onSendButtonClick" text="send" />
                                  </children>
                                  <padding>
                                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
