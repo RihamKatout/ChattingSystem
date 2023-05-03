@@ -15,7 +15,7 @@ public class UDPServerThread implements Runnable{
     private static int port = 9876;
     private static boolean running;
 
-
+    private static InetAddress IP;
     UDPServerThread() throws SocketException {
         running = true;
         socket = new DatagramSocket(port);
@@ -76,5 +76,13 @@ public class UDPServerThread implements Runnable{
     }
     private void addMessage(chat targetChat, String msg){
         targetChat.addReceivedMessage(msg);
+    }
+
+    public static void setIP(InetAddress IP) {
+        UDPServerThread.IP = IP;
+    }
+
+    public static InetAddress getIP() {
+        return IP;
     }
 }

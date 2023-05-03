@@ -19,7 +19,7 @@ public class GUIController {
     @FXML
     void onSendButtonClick(ActionEvent event) throws IOException {
         //prepare IPs, ports & sendData
-        UDPClientThread.setIP(InetAddress.getByName(LocalIP.getText()));
+        UDPServerThread.setIP(InetAddress.getByName(LocalIP.getText()));
         UDPClientThread.setPort(Integer.parseInt(LocalPort.getText()));
         UDPClientThread.setFriendIP(InetAddress.getByName(RemoteIP.getText()));
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));

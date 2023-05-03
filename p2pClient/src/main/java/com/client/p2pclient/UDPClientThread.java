@@ -11,7 +11,7 @@ public class UDPClientThread{
     private static DatagramSocket socket;
     private static byte[] buffer, sentData;
     private boolean running;
-    private static InetAddress IP, friendIP;
+    private static InetAddress friendIP;
     private static int port, friendPort;
     UDPClientThread() throws SocketException {
         myUsername="Riham";
@@ -30,10 +30,6 @@ public class UDPClientThread{
     }
 
     public static void setPort(int port) { UDPClientThread.port = port;}
-
-    public static void setIP(InetAddress IP) { UDPClientThread.IP = IP; }
-
-    public static InetAddress getIP() { return IP; }
 
     public static int getPort() { return port; }
 

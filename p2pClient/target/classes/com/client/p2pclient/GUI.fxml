@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="1060.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.p2pclient.GUIController">
    <children>
       <VBox layoutX="882.0" layoutY="49.0" prefHeight="762.0" prefWidth="993.0" style="-fx-background-color: #5534;" />
-      <TextArea fx:id="messageBox" layoutX="881.0" layoutY="828.0" prefHeight="152.0" prefWidth="994.0" promptText="enter text here">
+      <TextArea fx:id="messageBox" layoutX="881.0" layoutY="825.0" prefHeight="152.0" prefWidth="994.0" promptText="enter text here">
          <font>
             <Font size="27.0" />
          </font>
@@ -23,22 +23,22 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField layoutX="628.0" layoutY="49.0" prefHeight="0.0" prefWidth="243.0">
+      <TextField fx:id="ServerIP" layoutX="628.0" layoutY="49.0" prefHeight="0.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="473.0" layoutY="236.0" text="Available interface">
+      <Label layoutX="473.0" layoutY="225.0" text="Available interface">
          <font>
-            <Font size="23.0" />
+            <Font size="26.0" />
          </font>
       </Label>
-      <TitledPane animated="false" layoutX="472.0" layoutY="270.0" prefHeight="16.0" prefWidth="305.0" text="WI-Fi: 192.168.1.112">
+      <TitledPane animated="false" layoutX="472.0" layoutY="270.0" prefHeight="57.0" prefWidth="395.0" text="WI-Fi: 192.168.1.112">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
          <font>
-            <Font size="20.0" />
+            <Font size="26.0" />
          </font>
       </TitledPane>
       <Label layoutX="468.0" layoutY="112.0" text="TCP Server port">
@@ -46,7 +46,7 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField layoutX="628.0" layoutY="107.0" prefHeight="6.0" prefWidth="243.0">
+      <TextField fx:id="ServerPort" layoutX="628.0" layoutY="107.0" prefHeight="6.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -56,7 +56,7 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField layoutX="628.0" layoutY="386.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="LocalIP" layoutX="628.0" layoutY="386.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -98,17 +98,17 @@
          <font>
             <Font size="23.0" />
          </font></Button>
-      <TextField layoutX="628.0" layoutY="443.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="LocalPort" layoutX="628.0" layoutY="443.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField layoutX="628.0" layoutY="548.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="RemoteIP" layoutX="628.0" layoutY="548.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField layoutX="628.0" layoutY="605.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="RemotePort" layoutX="628.0" layoutY="605.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
