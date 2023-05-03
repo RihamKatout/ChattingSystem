@@ -85,4 +85,12 @@ public class UDPServerThread implements Runnable{
     public static InetAddress getIP() {
         return IP;
     }
+
+    public static void setPort(int port) {
+        UDPServerThread.port = port;
+    }
+
+    public static int getPort() {
+        return port;
+    }
 }

@@ -12,7 +12,7 @@ public class UDPClientThread{
     private static byte[] buffer, sentData;
     private boolean running;
     private static InetAddress friendIP;
-    private static int port, friendPort;
+    private static int friendPort;
     UDPClientThread() throws SocketException {
         myUsername="Riham";
         running = true;
@@ -28,11 +28,6 @@ public class UDPClientThread{
     public static void setMyUsername(String myUsername) {
         UDPClientThread.myUsername = myUsername;
     }
-
-    public static void setPort(int port) { UDPClientThread.port = port;}
-
-    public static int getPort() { return port; }
-
     public static byte[] getBuffer() { return buffer; }
 
     public static byte[] getSentData() { return sentData; }
