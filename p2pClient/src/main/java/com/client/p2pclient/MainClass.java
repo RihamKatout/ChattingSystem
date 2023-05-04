@@ -24,8 +24,10 @@ public class MainClass extends Application  {
     }
 
     public static void main(String[] args) throws IOException {
-
-//        launch();
+        UDPServerThread UDPServer = new UDPServerThread();
+        Thread threadServer = new Thread(UDPServer);
+        threadServer.start();
+        launch();
 //        String sentenceFromClient;
 //        String responseFromClient;
 //        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));

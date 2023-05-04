@@ -1,28 +1,25 @@
 package com.client.p2pclient;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
 import java.util.ArrayList;
 
 public class UDPServerThread implements Runnable{
     private static DatagramSocket socket;
     private static DatagramPacket packet, sendPacket;
     private static byte[] buffer, sendData;
-    private static ArrayList<chat>chats;
-    private static int port = 9876;
+    private static ArrayList<Chat>chats;
+    private static int port;
     private static boolean running;
 
-    private static InetAddress IP;
-    UDPServerThread() throws SocketException {
+    UDPServerThread() throws SocketException, UnknownHostException {
         running = true;
-        socket = new DatagramSocket(port);
+        port = 1218;
         buffer = new byte[1024];
-        packet = new DatagramPacket(buffer, buffer.length);
-        chats = new ArrayList<chat>();
+        chats = new ArrayList<Chat>();
         sendData = new byte[1024];
+        socket = new DatagramSocket(port);
+        packet = new DatagramPacket(buffer, buffer.length);
     }
     @Override
     public void run(){
@@ -39,24 +36,18 @@ public class UDPServerThread implements Runnable{
                 int friendPort = packet.getPort();
 
                 //check if the user is a friend
-                User user2 = new User(friendIPAddress.toString(), friendPort, input[0]);
+                User user2 = new User(friendIPAddress.toString(), friendPort);
                 int i = checkFriendship(user2);
                 if(i==-1){
                     //create a new chat
                     i = createChat(user2);
                 }
-                String message = input[1];
-                for(int t=2;t< input.length;t++)
+                String message = "";
+                for(int t=0;t< input.length;t++)
                     message+=input[t];
 
+                System.out.println(message);
                 addMessage(chats.get(i), message);
-                sendData = UDPClientThread.getMyUsername().getBytes();
-                sendPacket=new DatagramPacket(sendData, sendData.length, friendIPAddress, friendPort);
-                try {
-                    socket.send(sendPacket);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
             socket.close();
         }
@@ -70,20 +61,12 @@ public class UDPServerThread implements Runnable{
         return -1;
     }
     private int createChat(User friend){
-        chat newChat = new chat(friend);
+        Chat newChat = new Chat(friend);
         chats.add(newChat);
         return chats.size()-1;
     }
-    private void addMessage(chat targetChat, String msg){
+    private void addMessage(Chat targetChat, String msg){
         targetChat.addReceivedMessage(msg);
-    }
-
-    public static void setIP(InetAddress IP) {
-        UDPServerThread.IP = IP;
-    }
-
-    public static InetAddress getIP() {
-        return IP;
     }
 
     public static void setPort(int port) {

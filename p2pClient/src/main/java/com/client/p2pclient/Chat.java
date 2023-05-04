@@ -3,18 +3,18 @@ package com.client.p2pclient;
 import java.util.ArrayList;
 
 
-public class chat {
+public class Chat {
     private User friend;
     private ArrayList<String> sentMessages, receivedMessages;
     private ArrayList<Boolean>sentOrReceived; //true => sent, false => received
 
-    chat(){
+    Chat(){
         friend = new User();
         sentMessages = new ArrayList<String>();
         receivedMessages = new ArrayList<String>();
         sentOrReceived = new ArrayList<Boolean>();
     }
-    chat(User friend){
+    Chat(User friend){
         this();
         this.friend = friend;
     }
