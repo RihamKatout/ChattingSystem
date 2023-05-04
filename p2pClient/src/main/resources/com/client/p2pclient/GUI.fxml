@@ -113,7 +113,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button layoutX="199.0" layoutY="616.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Test">
+      <Button fx:id="testConnectionButton" layoutX="629.0" layoutY="174.0" mnemonicParsing="false" onAction="#connectServerAndDest" prefHeight="45.0" prefWidth="115.0" text="connect" textFill="#01ff51">
          <font>
             <Font size="23.0" />
          </font>

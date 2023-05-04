@@ -13,21 +13,21 @@ public class MainClass extends Application  {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("GUI.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("loginPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("GUI.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("loginPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         stage.setTitle("messenger");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
-        //test
+//        test
     }
 
     public static void main(String[] args) throws IOException {
-        UDPServerThread UDPServer = new UDPServerThread();
-        Thread threadServer = new Thread(UDPServer);
-        threadServer.start();
-        launch();
+//        UDPServerThread UDPServer = new UDPServerThread();
+//        Thread threadServer = new Thread(UDPServer);
+//        threadServer.start();
+//        launch();
 //        String sentenceFromClient;
 //        String responseFromClient;
 //        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
