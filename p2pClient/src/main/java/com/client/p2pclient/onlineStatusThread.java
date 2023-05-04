@@ -12,7 +12,7 @@ public class onlineStatusThread implements Runnable {
     private DataOutputStream outToClient;
     private Boolean running ,response;
     onlineStatusThread() throws IOException {
-        welcomeSocket = new ServerSocket(1218);
+        welcomeSocket = new ServerSocket(1478  );
         running = true ;
         // test
     }

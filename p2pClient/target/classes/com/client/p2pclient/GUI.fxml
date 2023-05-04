@@ -9,31 +9,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1060.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.p2pclient.GUIController">
+<AnchorPane prefHeight="897.0" prefWidth="1442.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.p2pclient.GUIController">
    <children>
-      <VBox layoutX="882.0" layoutY="49.0" prefHeight="762.0" prefWidth="993.0" style="-fx-background-color: #5534;" />
-      <TextArea fx:id="messageBox" layoutX="881.0" layoutY="825.0" prefHeight="152.0" prefWidth="994.0" promptText="enter text here">
+      <VBox layoutX="794.0" layoutY="47.0" prefHeight="456.0" prefWidth="602.0" style="-fx-background-color: #5534;" />
+      <TextArea fx:id="messageBox" layoutX="796.0" layoutY="527.0" prefHeight="152.0" prefWidth="600.0" promptText="enter text here">
          <font>
             <Font size="27.0" />
          </font>
       </TextArea>
-      <VBox layoutX="43.0" layoutY="45.0" prefHeight="826.0" prefWidth="416.0" style="-fx-background-color: #5534;" />
-      <Label layoutX="468.0" layoutY="54.0" text="TCP Server IP">
+      <VBox layoutX="43.0" layoutY="45.0" prefHeight="463.0" prefWidth="318.0" style="-fx-background-color: #5534;" />
+      <Label layoutX="377.0" layoutY="54.0" text="TCP Server IP">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="ServerIP" layoutX="628.0" layoutY="49.0" prefHeight="0.0" prefWidth="243.0">
+      <TextField fx:id="ServerIP" layoutX="537.0" layoutY="49.0" prefHeight="0.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="473.0" layoutY="225.0" text="Available interface">
+      <Label layoutX="382.0" layoutY="225.0" text="Available interface">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <TitledPane animated="false" layoutX="472.0" layoutY="270.0" prefHeight="57.0" prefWidth="395.0" text="WI-Fi: 192.168.1.112">
+      <TitledPane animated="false" layoutX="381.0" layoutY="270.0" prefHeight="57.0" prefWidth="395.0" text="WI-Fi: 192.168.1.112">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
@@ -41,79 +41,79 @@
             <Font size="26.0" />
          </font>
       </TitledPane>
-      <Label layoutX="468.0" layoutY="112.0" text="TCP Server port">
+      <Label layoutX="377.0" layoutY="112.0" text="TCP Server port">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="ServerPort" layoutX="628.0" layoutY="107.0" prefHeight="6.0" prefWidth="243.0">
+      <TextField fx:id="ServerPort" layoutX="537.0" layoutY="107.0" prefHeight="6.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="473.0" layoutY="391.0" text="Local IP">
+      <Label layoutX="382.0" layoutY="391.0" text="Local IP">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="LocalIP" layoutX="628.0" layoutY="386.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="LocalIP" layoutX="537.0" layoutY="386.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="473.0" layoutY="448.0" text="Local port">
+      <Label layoutX="382.0" layoutY="448.0" text="Local port">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="472.0" layoutY="553.0" text="Remote IP">
+      <Label layoutX="381.0" layoutY="505.0" text="Remote IP">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="472.0" layoutY="610.0" text="Remote port">
+      <Label layoutX="381.0" layoutY="562.0" text="Remote port">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Button layoutX="1827.0" layoutY="987.0" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="45.0" prefWidth="81.0" text="Send">
+      <Button layoutX="704.0" layoutY="609.0" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="45.0" prefWidth="81.0" text="Send">
          <font>
             <Font size="21.0" />
          </font></Button>
-      <Label layoutX="44.0" layoutY="974.0" prefHeight="62.0" prefWidth="108.0" text="Status">
+      <Label layoutX="58.0" layoutY="679.0" prefHeight="62.0" prefWidth="108.0" text="Status">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="143.0" layoutY="987.0" prefHeight="27.0" prefWidth="903.0">
+      <TextField layoutX="157.0" layoutY="692.0" prefHeight="27.0" prefWidth="903.0">
          <font>
             <Font size="20.0" />
          </font></TextField>
-      <Label layoutX="166.0" layoutY="2.0" text="Online users">
+      <Label layoutX="123.0" layoutY="9.0" text="Online users">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Button layoutX="44.0" layoutY="911.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Logout">
+      <Button layoutX="58.0" layoutY="616.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Logout">
          <font>
             <Font size="23.0" />
          </font></Button>
-      <TextField fx:id="LocalPort" layoutX="628.0" layoutY="443.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="LocalPort" layoutX="537.0" layoutY="443.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="RemoteIP" layoutX="628.0" layoutY="548.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="RemoteIP" layoutX="537.0" layoutY="500.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="RemotePort" layoutX="628.0" layoutY="605.0" prefHeight="44.0" prefWidth="243.0">
+      <TextField fx:id="RemotePort" layoutX="537.0" layoutY="557.0" prefHeight="44.0" prefWidth="243.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button layoutX="185.0" layoutY="911.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Test">
+      <Button layoutX="199.0" layoutY="616.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Test">
          <font>
             <Font size="23.0" />
          </font>

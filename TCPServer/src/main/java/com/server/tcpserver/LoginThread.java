@@ -10,16 +10,16 @@ public class LoginThread implements Runnable {
     private Socket connectionSocket;
     private BufferedReader inFromClient;
     private DataOutputStream outToClient;
-    private Boolean response;
+    private String response;
     LoginThread() throws IOException {
-        welcomeSocket = new ServerSocket(6789);
+        welcomeSocket = new ServerSocket(1218);
     }
     @Override
     public void run() {
         synchronized (this) {
             while (!welcomeSocket.isClosed()) {
                 OutputStream outputStream;
-                response = false ;
+                response = "failed" ;
                 String message = "";
                 try {
                     connectionSocket = welcomeSocket.accept();
@@ -33,7 +33,7 @@ public class LoginThread implements Runnable {
                     throw new RuntimeException(e);
                 }
                 try {
-                    String answer = response ? "success":"failed";
+                    String answer = response ;
                     outputStream.write(answer.getBytes());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -42,9 +42,9 @@ public class LoginThread implements Runnable {
         }
     }
 
-    Boolean Login(String clientLoginInfo){
+    String Login(String clientLoginInfo){
         System.out.println(clientLoginInfo);
-        Boolean response = false ;
+        String response = "failed" ;
         BufferedReader reader; // for reading from a file
         String clientValues[] = clientLoginInfo.split(",");
         try {
@@ -52,11 +52,11 @@ public class LoginThread implements Runnable {
             String line = reader.readLine();
             while (line != null) {
                 String dataBase[] = line.split(",");
-                if ((dataBase[0]).equals(clientValues[0])   ) //validating name and password
+                if ((dataBase[0]).equals(clientValues[0]) && (dataBase[1]).equals(clientValues[1])   ) //validating name and password
                 {
                     System.out.println("hi "+line);
                     OnlineStatus.newOnlineUser(line);
-                    response = true;
+                    response = line;
                     break;
                 }
                 line = reader.readLine();

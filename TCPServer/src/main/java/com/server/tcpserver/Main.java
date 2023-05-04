@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class Main extends Application  {
     @Override
@@ -17,6 +19,16 @@ public class Main extends Application  {
         stage.show();
     }
     public  static void main(String[] args) throws IOException, InterruptedException {
+
+        InetAddress ip;
+        String hostname;
+        try {
+            ip = InetAddress.getLocalHost();
+            hostname = ip.getHostAddress();
+            System.out.println("Your current IP address : " + hostname);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         LoginThread loginThread = new LoginThread();
         Thread threadLogin = new Thread(loginThread);
         threadLogin.start();

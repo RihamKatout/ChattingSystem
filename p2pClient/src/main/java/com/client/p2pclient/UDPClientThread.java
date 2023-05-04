@@ -5,7 +5,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.nio.charset.StandardCharsets;
 
 public class UDPClientThread{
     private static String myUsername;
@@ -48,6 +47,8 @@ public class UDPClientThread{
         socket = new DatagramSocket();
         DatagramPacket sendPacket = new DatagramPacket(sentData, sentData.length, friendIP, friendPort);
         socket.send(sendPacket);
+        DatagramPacket receivePacket = new DatagramPacket(buffer, buffer.length);
+        socket.receive(receivePacket); //receive friend's username
         socket.close();
     }
 }

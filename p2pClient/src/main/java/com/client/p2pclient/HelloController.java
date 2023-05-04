@@ -14,7 +14,7 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick() throws IOException {
         welcomeText.setText("Welcome to JavaFX Application!");
-        HelloApplication.serverHelper.sendToServer(Request.LOG_IN,"hello");
+//        HelloApplication.serverHelper.sendToServer(Request.LOG_IN,"hello");
 
     }
 }

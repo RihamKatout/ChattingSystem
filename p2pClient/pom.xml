@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.client.p2pclient/com.client.p2pclient.HelloApplication</mainClass>
+                            <mainClass>com.client.p2pclient/com.client.p2pclient.MainClass</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

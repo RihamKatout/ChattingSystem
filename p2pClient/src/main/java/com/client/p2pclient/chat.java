@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 
 public class chat {
-    private user friend;
+    private User friend;
     private ArrayList<String> sentMessages, receivedMessages;
     private ArrayList<Boolean>sentOrReceived; //true => sent, false => received
 
     chat(){
-        friend = new user();
+        friend = new User();
         sentMessages = new ArrayList<String>();
         receivedMessages = new ArrayList<String>();
         sentOrReceived = new ArrayList<Boolean>();
     }
-    chat(user friend){
+    chat(User friend){
         this();
         this.friend = friend;
     }
 
-    public void setFriend(user friend) {
+    public void setFriend(User friend) {
         this.friend = friend;
     }
 
@@ -35,7 +35,7 @@ public class chat {
         this.sentOrReceived = sentOrReceived;
     }
 
-    public user getFriend() {
+    public User getFriend() {
         return friend;
     }
 
@@ -51,7 +51,7 @@ public class chat {
         return sentOrReceived;
     }
 
-    public boolean matchUser(user user2){
+    public boolean matchUser(User user2){
         return user2.equals(friend);
     }
 
