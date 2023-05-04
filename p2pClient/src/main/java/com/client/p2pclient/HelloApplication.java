@@ -27,6 +27,9 @@ public class HelloApplication extends Application  {
 
     public static void main(String[] args) throws IOException {
 
+        UDPServerThread UDPServer = new UDPServerThread();
+        Thread threadServer = new Thread(UDPServer);
+        threadServer.start();
         launch();
 //        String sentenceFromClient;
 //        String responseFromClient;

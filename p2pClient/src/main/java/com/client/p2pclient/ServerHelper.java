@@ -20,7 +20,7 @@ public class ServerHelper {
         return response;
     }
     public void sendToServer(Request type,String message) throws IOException {
-        clientSocketLogIn = new Socket("192.168.1.5", 6789);
+        clientSocketLogIn = new Socket("172.19.203.142", 1218);
         outputStreamLogIn = clientSocketLogIn.getOutputStream();
         inputStreamLogIn = clientSocketLogIn.getInputStream();
         String req = message;
