@@ -1,5 +1,7 @@
 package com.client.p2pclient;
 
+import javafx.scene.control.Label;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class UDPServerThread implements Runnable{
 
     UDPServerThread() throws SocketException, UnknownHostException {
         running = true;
-        port = 1218;
+        port = 1254;
         buffer = new byte[1024];
         chats = new ArrayList<Chat>();
         sendData = new byte[1024];
@@ -47,6 +49,7 @@ public class UDPServerThread implements Runnable{
                     message+=input[t];
 
                 System.out.println(message);
+                GUIController.messagesArea.getChildren().add(new Label("received : " + message));
                 addMessage(chats.get(i), message);
             }
             socket.close();
@@ -69,8 +72,9 @@ public class UDPServerThread implements Runnable{
         targetChat.addReceivedMessage(msg);
     }
 
-    public static void setPort(int port) {
+    public static void setPort(int port) throws SocketException {
         UDPServerThread.port = port;
+        socket = new DatagramSocket(port);
     }
 
     public static int getPort() {

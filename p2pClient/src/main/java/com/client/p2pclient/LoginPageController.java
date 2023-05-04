@@ -22,6 +22,8 @@ public class LoginPageController {
     void login(ActionEvent event) throws IOException {
         String name = userNameTextField.getText();
         String pass = passwordTextField.getText();
+        MainClass.serverHelper.setServerIp("192.168.1.25");
+        MainClass.serverHelper.setServerPort(1218);
         String serverResponse = MainClass.serverHelper.sendToLoginServer(name,pass); //"192.168.1.9",1218
         if(serverResponse.equals("failed")){
             System.out.println("Failed to login");
