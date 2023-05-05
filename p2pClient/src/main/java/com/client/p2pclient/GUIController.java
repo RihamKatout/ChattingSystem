@@ -1,6 +1,7 @@
 
 package com.client.p2pclient;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,7 +58,7 @@ public class GUIController implements Initializable {
                 thread.interrupt();
             }
         }
-        UDPServerThread UDPServer = new UDPServerThread(9999);
+        UDPServerThread UDPServer = new UDPServerThread();
         MainClass.serverHelper.setServerIp(ServerIP.getText());
         MainClass.serverHelper.setServerPort(Integer.parseInt(ServerPort.getText()));
         UDPServerThread.setPort(Integer.parseInt(LocalPort.getText()));
@@ -73,6 +74,13 @@ public class GUIController implements Initializable {
         UDPClientThread.setSentData(messageBox.getText().getBytes());
         UDPClientThread.sendData();
         messagesArea.getChildren().add(new Label("Me : " + messageBox.getText()));
+    }
+
+    public static void receivedShow(String s){
+        Platform.runLater(() -> {
+        // Update UI components here
+            messagesArea2.getChildren().add(new Label("received : " + s));
+        });
     }
 
     @Override

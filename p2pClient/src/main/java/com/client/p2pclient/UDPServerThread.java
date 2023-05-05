@@ -1,7 +1,5 @@
 package com.client.p2pclient;
 
-import javafx.scene.control.Label;
-
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
@@ -14,13 +12,11 @@ public class UDPServerThread implements Runnable{
     private static int port;
     private static boolean running;
 
-    UDPServerThread(int Port) throws SocketException, UnknownHostException {
+    UDPServerThread() throws SocketException, UnknownHostException {
         running = true;
-        port = Port;
         buffer = new byte[1024];
         chats = new ArrayList<Chat>();
         sendData = new byte[1024];
-        socket = new DatagramSocket(port);
         packet = new DatagramPacket(buffer, buffer.length);
     }
     @Override
@@ -29,7 +25,7 @@ public class UDPServerThread implements Runnable{
             while(running){
                 //receivedData Form : username_message
                 try {
-                    socket = new DatagramSocket(port);
+
                     socket.receive(packet);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -50,11 +46,15 @@ public class UDPServerThread implements Runnable{
                     message+=input[t];
 
                 System.out.println(message);
-                GUIController.messagesArea2.getChildren().add(new Label("received : " + message));
+
+                sendToGUI(message);
                 addMessage(chats.get(i), message);
             }
             socket.close();
         }
+    }
+    private void sendToGUI(String s){
+        GUIController.receivedShow(s);
     }
 
     private int checkFriendship(User user2){
@@ -75,6 +75,7 @@ public class UDPServerThread implements Runnable{
 
     public static void setPort(int port) throws SocketException {
         UDPServerThread.port = port;
+        socket = new DatagramSocket(port);
     }
 
     public static int getPort() {
