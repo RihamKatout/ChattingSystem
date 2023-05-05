@@ -55,13 +55,14 @@ public class GUIController implements Initializable {
         //Iterate over set to find yours
         for(Thread thread : setOfThread){
             if(thread.getName().equals("serverThread")){
+                System.out.println("hello");
                 thread.interrupt();
             }
         }
         UDPServerThread UDPServer = new UDPServerThread();
         MainClass.serverHelper.setServerIp(ServerIP.getText());
         MainClass.serverHelper.setServerPort(Integer.parseInt(ServerPort.getText()));
-        UDPServerThread.setPort(Integer.parseInt(LocalPort.getText()));
+        UDPServer.setPort(Integer.parseInt(LocalPort.getText()));
         UDPClientThread.setFriendIP(InetAddress.getByName(RemoteIP.getText()));
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
         Thread threadServer = new Thread(UDPServer,"serverThread");

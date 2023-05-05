@@ -5,11 +5,11 @@ import java.net.*;
 import java.util.ArrayList;
 
 public class UDPServerThread implements Runnable{
-    private static DatagramSocket socket;
-    private static DatagramPacket packet, sendPacket;
-    private static byte[] buffer, sendData;
+    private  DatagramSocket socket;
+    private  DatagramPacket packet, sendPacket;
+    private  byte[] buffer, sendData;
     private static ArrayList<Chat>chats;
-    private static int port;
+    private  int port;
     private static boolean running;
 
     UDPServerThread() throws SocketException, UnknownHostException {
@@ -73,12 +73,12 @@ public class UDPServerThread implements Runnable{
         targetChat.addReceivedMessage(msg);
     }
 
-    public static void setPort(int port) throws SocketException {
-        UDPServerThread.port = port;
+    public void setPort(int Port) throws SocketException {
+        port = Port;
         socket = new DatagramSocket(port);
     }
 
-    public static int getPort() {
+    public int getPort() {
         return port;
     }
 }
