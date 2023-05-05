@@ -10,7 +10,6 @@ import java.io.*;
 public class MainClass extends Application  {
     public static ServerHelper serverHelper;
     public static User mainUser ;
-    public static  Thread threadServer;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("GUI.fxml"));
@@ -24,9 +23,7 @@ public class MainClass extends Application  {
     }
 
     public static void main(String[] args) throws IOException {
-        UDPServerThread UDPServer = new UDPServerThread();
-        threadServer = new Thread(UDPServer);
-        threadServer.start();
+
 
         mainUser = new User();
         onlineStatusThread thread = new onlineStatusThread();

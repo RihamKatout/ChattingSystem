@@ -16,6 +16,7 @@ import java.net.SocketException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class GUIController implements Initializable {
 
@@ -46,14 +47,24 @@ public class GUIController implements Initializable {
     private Button testConnectionButton;
 
     @FXML
-    void connectServerAndDest(ActionEvent event) throws UnknownHostException, SocketException {
-        MainClass.threadServer.interrupt();
+    void connectServerAndDest(ActionEvent event) throws UnknownHostException, SocketException, InterruptedException {
+//        MainClass.threadServer.interrupt();
+//        MainClass.threadServer.join();
+        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
+        //Iterate over set to find yours
+        for(Thread thread : setOfThread){
+            if(thread.getName().equals("serverThread")){
+                thread.interrupt();
+            }
+        }
+        UDPServerThread UDPServer = new UDPServerThread(9999);
         MainClass.serverHelper.setServerIp(ServerIP.getText());
         MainClass.serverHelper.setServerPort(Integer.parseInt(ServerPort.getText()));
         UDPServerThread.setPort(Integer.parseInt(LocalPort.getText()));
         UDPClientThread.setFriendIP(InetAddress.getByName(RemoteIP.getText()));
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
-        MainClass.threadServer.start();
+        Thread threadServer = new Thread(UDPServer,"serverThread");
+        threadServer.start();
     }
 
     @FXML

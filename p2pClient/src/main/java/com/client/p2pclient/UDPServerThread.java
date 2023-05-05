@@ -14,9 +14,9 @@ public class UDPServerThread implements Runnable{
     private static int port;
     private static boolean running;
 
-    UDPServerThread() throws SocketException, UnknownHostException {
+    UDPServerThread(int Port) throws SocketException, UnknownHostException {
         running = true;
-        port = 1254;
+        port = Port;
         buffer = new byte[1024];
         chats = new ArrayList<Chat>();
         sendData = new byte[1024];
@@ -29,6 +29,7 @@ public class UDPServerThread implements Runnable{
             while(running){
                 //receivedData Form : username_message
                 try {
+                    socket = new DatagramSocket(port);
                     socket.receive(packet);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -74,7 +75,6 @@ public class UDPServerThread implements Runnable{
 
     public static void setPort(int port) throws SocketException {
         UDPServerThread.port = port;
-        socket = new DatagramSocket(port);
     }
 
     public static int getPort() {
