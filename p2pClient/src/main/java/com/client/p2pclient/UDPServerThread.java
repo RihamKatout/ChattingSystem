@@ -49,7 +49,7 @@ public class UDPServerThread implements Runnable{
                     message+=input[t];
 
                 System.out.println(message);
-                GUIController.messagesArea.getChildren().add(new Label("received : " + message));
+                GUIController.messagesArea2.getChildren().add(new Label("received : " + message));
                 addMessage(chats.get(i), message);
             }
             socket.close();
