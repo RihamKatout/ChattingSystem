@@ -7,151 +7,215 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="897.0" prefWidth="1442.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.p2pclient.GUIController">
+<AnchorPane prefHeight="772.0" prefWidth="1442.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.p2pclient.GUIController">
    <children>
-      <ScrollPane fitToWidth="true" layoutX="902.0" layoutY="94.0" maxHeight="456.0" maxWidth="602.0" minHeight="409.0" minWidth="494.0" prefHeight="409.0" prefWidth="494.0">
-         <content>
-            <VBox fx:id="messagesArea" maxHeight="1.7976931348623157E308" maxWidth="491.0" minWidth="491.0" style="-fx-background-color: #5534;" />
-         </content>
-      </ScrollPane>
-      <TextArea fx:id="messageBox" disable="true" layoutX="902.0" layoutY="527.0" prefHeight="152.0" prefWidth="494.0" promptText="enter text here">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </TextArea>
-      <ScrollPane hbarPolicy="NEVER" layoutX="27.0" layoutY="181.0" prefHeight="437.0" prefWidth="323.0">
-         <content>
-            <VBox fx:id="onlineArea" disable="true" prefHeight="433.0" prefWidth="318.0" style="-fx-background-color: White;" />
-         </content>
-      </ScrollPane>
-      <Label layoutX="407.0" layoutY="150.0" text="TCP Server IP">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <TextField fx:id="ServerIP" layoutX="567.0" layoutY="145.0" prefHeight="0.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="408.0" layoutY="263.0" text="Available interface">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <TitledPane animated="false" disable="true" layoutX="407.0" layoutY="308.0" prefHeight="57.0" prefWidth="395.0" text="WI-Fi: 192.168.1.112">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-         <font>
-            <Font size="26.0" />
-         </font>
-      </TitledPane>
-      <Label layoutX="407.0" layoutY="208.0" text="TCP Server port">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <TextField fx:id="ServerPort" layoutX="567.0" layoutY="203.0" prefHeight="6.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="412.0" layoutY="386.0" text="Local IP">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <TextField fx:id="LocalIP" disable="true" layoutX="562.0" layoutY="379.0" prefHeight="44.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="408.0" layoutY="441.0" text="Local port">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="406.0" layoutY="494.0" text="Remote IP">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="410.0" layoutY="546.0" text="Remote port">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Button fx:id="sendButton" disable="true" layoutX="807.0" layoutY="635.0" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="45.0" prefWidth="81.0" text="Send">
-         <font>
-            <Font size="21.0" />
-         </font></Button>
-      <Label layoutX="58.0" layoutY="679.0" prefHeight="62.0" prefWidth="108.0" text="Status">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <TextField fx:id="Status" disable="true" layoutX="157.0" layoutY="692.0" prefHeight="27.0" prefWidth="903.0">
-         <font>
-            <Font size="20.0" />
-         </font></TextField>
-      <Label layoutX="109.0" layoutY="141.0" text="Online users">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <TextField fx:id="LocalPort" disable="true" layoutX="562.0" layoutY="436.0" prefHeight="44.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="RemoteIP" disable="true" layoutX="562.0" layoutY="489.0" prefHeight="44.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="RemotePort" disable="true" layoutX="564.0" layoutY="541.0" prefHeight="44.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Button fx:id="connectButton" disable="true" layoutX="417.0" layoutY="610.0" mnemonicParsing="false" onAction="#connectServerAndDest" prefHeight="45.0" prefWidth="115.0" text="connect" textFill="#01ff51">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Button>
-      <Label layoutX="27.0" layoutY="23.0" text="username">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <TextField fx:id="usernameTestBox" layoutX="187.0" layoutY="18.0" prefHeight="0.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="27.0" layoutY="81.0" text="password">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <TextField fx:id="passwordTextBox" layoutX="187.0" layoutY="76.0" prefHeight="6.0" prefWidth="243.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
-      <Button fx:id="loginButton" layoutX="496.0" layoutY="48.0" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="115.0" text="login">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Button>
-      <Button fx:id="logoutButton" disable="true" layoutX="657.0" layoutY="48.0" mnemonicParsing="false" onAction="#logout" prefHeight="45.0" prefWidth="115.0" text="logout" textFill="#ff0303">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Button>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="14.0" spacing="20.0">
+         <children>
+            <VBox spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Label text="username">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="usernameTestBox" prefHeight="0.0" prefWidth="243.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Label text="password">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="passwordTextBox" prefHeight="6.0" prefWidth="243.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="115.0" text="login">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="logoutButton" disable="true" mnemonicParsing="false" onAction="#logout" prefHeight="45.0" prefWidth="115.0" text="logout" textFill="#ff0303">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="12.0" layoutY="700.0">
+         <children>
+            <Label prefHeight="62.0" prefWidth="108.0" text="Status">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Status" disable="true" prefHeight="27.0" prefWidth="903.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER_RIGHT" layoutX="603.0" layoutY="140.0" spacing="20.0">
+         <children>
+            <HBox alignment="BASELINE_LEFT" prefWidth="420.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="164.0" text="TCP Server IP">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ServerIP" prefHeight="44.0" prefWidth="243.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="BASELINE_LEFT" prefWidth="420.0" spacing="20.0">
+               <children>
+                  <Label text="TCP Server port">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ServerPort" prefHeight="6.0" prefWidth="243.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <Label text="Available interface">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <TitledPane animated="false" disable="true" prefHeight="57.0" prefWidth="395.0" text="WI-Fi: 192.168.1.112">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </TitledPane>
+               </children>
+            </VBox>
+            <HBox alignment="BASELINE_LEFT" prefWidth="420.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="156.0" text="Local IP">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="LocalIP" disable="true" prefHeight="44.0" prefWidth="243.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="BASELINE_LEFT" prefWidth="420.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="161.0" text="Local port">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="LocalPort" disable="true" prefHeight="44.0" prefWidth="243.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="BASELINE_LEFT" prefWidth="420.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="158.0" text="Remote IP">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="RemoteIP" disable="true" prefHeight="44.0" prefWidth="243.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="BASELINE_LEFT" prefWidth="420.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="34.0" prefWidth="160.0" text="Remote port">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="RemotePort" disable="true" prefHeight="44.0" prefWidth="243.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <Button fx:id="connectButton" disable="true" mnemonicParsing="false" onAction="#connectServerAndDest" prefHeight="45.0" prefWidth="115.0" text="connect" textFill="#01ff51">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="1129.0" layoutY="14.0" prefHeight="736.0" prefWidth="278.0">
+         <children>
+            <Label text="Online users">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="685.0" prefWidth="278.0">
+               <content>
+                  <VBox fx:id="onlineArea" disable="true" prefHeight="687.0" prefWidth="280.0" style="-fx-background-color: White;" />
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_RIGHT" layoutX="24.0" layoutY="143.0" spacing="20.0">
+         <children>
+            <ScrollPane fitToWidth="true" maxHeight="456.0" maxWidth="602.0" minHeight="355.0" minWidth="494.0" prefHeight="355.0" prefWidth="494.0">
+               <content>
+                  <VBox fx:id="messagesArea" maxHeight="1.7976931348623157E308" maxWidth="491.0" minWidth="491.0" style="-fx-background-color: #5534;" />
+               </content>
+            </ScrollPane>
+            <TextArea fx:id="messageBox" disable="true" prefHeight="111.0" prefWidth="494.0" promptText="enter text here">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </TextArea>
+            <Button fx:id="sendButton" disable="true" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="45.0" prefWidth="81.0" text="Send">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="updateButton" disable="true" layoutX="1038.0" layoutY="460.0" mnemonicParsing="false" onAction="#update" text="update" />
    </children>
 </AnchorPane>
