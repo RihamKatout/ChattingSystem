@@ -36,6 +36,11 @@ public class GUIController implements Initializable {
     @FXML
     private VBox onlineArea;
     public static VBox onlineArea2;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        messagesArea2 = messagesArea;
+        onlineArea2 = onlineArea;
+    }
     private void loginEnable(){
         usernameTestBox.setDisable(true);
         passwordTextBox.setDisable(true);
@@ -107,6 +112,8 @@ public class GUIController implements Initializable {
         int serverPort = Integer.parseInt(ServerPort.getText());
         String msg = "logout%" + name + "%" + MainClass.mainUser.getIP();
         MainClass.helper.sendToServer(serverIP, serverPort, msg);
+        messagesArea2.getChildren().clear();
+        messagesArea.getChildren().clear();
         logoutEnable();
         clearAll();
     }
@@ -181,10 +188,5 @@ public class GUIController implements Initializable {
                 onlineArea2.getChildren().add(new Label(data[i]));
             }
         });
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        messagesArea2 = messagesArea;
-       onlineArea2 = onlineArea;
     }
 }
