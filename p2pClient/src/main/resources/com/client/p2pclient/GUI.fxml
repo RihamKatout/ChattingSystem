@@ -22,7 +22,11 @@
             <Font size="27.0" />
          </font>
       </TextArea>
-      <VBox disable="true" layoutX="29.0" layoutY="177.0" prefHeight="433.0" prefWidth="318.0" style="-fx-background-color: #5534;" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="27.0" layoutY="181.0" prefHeight="437.0" prefWidth="323.0">
+         <content>
+            <VBox fx:id="onlineArea" disable="true" prefHeight="433.0" prefWidth="318.0" style="-fx-background-color: White;" />
+         </content>
+      </ScrollPane>
       <Label layoutX="407.0" layoutY="150.0" text="TCP Server IP">
          <font>
             <Font size="23.0" />

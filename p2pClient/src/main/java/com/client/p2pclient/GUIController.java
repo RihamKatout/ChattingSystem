@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -32,6 +33,10 @@ public class GUIController implements Initializable {
     @FXML
     private VBox messagesArea;
     public static VBox messagesArea2;
+
+    @FXML
+    private VBox onlineArea;
+    public static VBox onlineArea2;
     private void loginEnable(){
         usernameTestBox.setDisable(true);
         passwordTextBox.setDisable(true);
@@ -108,6 +113,19 @@ public class GUIController implements Initializable {
         logoutEnable();
         clearAll();
     }
+
+    private void selectNode(Node node) {
+        deselectAll();
+        node.setStyle("-fx-background-color: blue;");
+    }
+
+    private void deselectAll() {
+        for (var child : messagesArea.getChildren()) {
+            if (child instanceof Label) {
+                ((Label) child).setStyle("-fx-background-color: transparent;");
+            }
+        }
+    }
     @FXML
     void connectServerAndDest(ActionEvent event) throws UnknownHostException, SocketException, InterruptedException {
 //        MainClass.threadServer.interrupt();
@@ -130,20 +148,33 @@ public class GUIController implements Initializable {
         threadServer.start();
     }
     @FXML
-    void onSendButtonClick(ActionEvent event) throws IOException {
+    void onSendButtonClick() throws IOException {
 //        prepare IPs, ports & sendData
-        UDPClientThread.setSentData(messageBox.getText().getBytes());
-        UDPClientThread.sendData();
-        messagesArea.getChildren().add(new Label("Me : " + messageBox.getText()));
+//        UDPClientThread.setSentData(messageBox.getText().getBytes());
+//        UDPClientThread.sendData();
+        Node label = new Label("Me : " + messageBox.getText());
+        label.setOnMouseClicked(event -> selectNode(label));
+        messagesArea.getChildren().add(label);
+
     }
     public static void receivedShow(String s){
         Platform.runLater(() -> {
-        // Update UI components here
             messagesArea2.getChildren().add(new Label("received : " + s));
+        });
+    }
+    public static void onlineUpdate(String s){
+        onlineArea2.getChildren().removeAll();
+        Platform.runLater(() -> {
+            String data[] = s.split("$");
+            for(int i =0 ;i< data.length ; i ++ ){
+                String data2[] = data[i].split(",");
+                onlineArea2.getChildren().add(new Label(data[i]));
+            }
         });
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         messagesArea2 = messagesArea;
+       onlineArea2 = onlineArea;
     }
 }

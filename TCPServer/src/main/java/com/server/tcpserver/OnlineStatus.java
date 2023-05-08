@@ -25,7 +25,7 @@ public class OnlineStatus {
                 allOnlineUsers += online +'$';
             }
             String userData[] = user.split(",");
-            Socket clientSocketStatus = new Socket(userData[2], Integer.parseInt(userData[3]));
+            Socket clientSocketStatus = new Socket(userData[1], Integer.parseInt(userData[4]));
             OutputStream outputStreamStatus = clientSocketStatus.getOutputStream();
             InputStream inputStreamStatus = clientSocketStatus.getInputStream();
             outputStreamStatus.write(allOnlineUsers.getBytes());

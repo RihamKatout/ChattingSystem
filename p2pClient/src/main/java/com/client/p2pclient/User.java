@@ -55,6 +55,8 @@ public class User {
         setPort();
         UDPServer.setPort(port);
         UDPServer.getSocket().connect(InetAddress.getByName((InetAddress.getLocalHost().getHostAddress())),port);
+        Thread thread = new Thread(UDPServer);
+        thread.start();
         System.out.println("UDP created successfully");
     }
     public UDPServerThread getUDPServer(){

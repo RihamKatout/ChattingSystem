@@ -39,6 +39,7 @@ public class onlineStatusThread implements Runnable {
 //                    System.out.println("hello");
                     String onlineUsers = Helper.reader(inputStream);
                     System.out.println(onlineUsers);
+                    GUIController.onlineUpdate(onlineUsers);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

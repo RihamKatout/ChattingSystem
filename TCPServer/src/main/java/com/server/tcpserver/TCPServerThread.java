@@ -94,7 +94,7 @@ public class TCPServerThread implements Runnable {
         }
     }
 
-    String Login(String clientLoginInfo){
+    String Login(String clientLoginInfo) throws IOException {
         System.out.println(clientLoginInfo);
         String response = "failed" ;
         BufferedReader reader; // for reading from a file
@@ -122,6 +122,7 @@ public class TCPServerThread implements Runnable {
         if (response.equals("success")){
             GUIController.newLog(clientValues[0] + " just logged in");
             updateDataBase(clientValues[0],clientValues[2],"123");
+//            OnlineStatus.newOnlineUser(clientValues[0]+','+clientValues[2] +','+ clientValues[4]); // 4 is the udp port
         }
         return response ;
     }
