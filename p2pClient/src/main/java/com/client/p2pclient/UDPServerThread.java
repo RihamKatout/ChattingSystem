@@ -5,17 +5,13 @@ import java.net.*;
 import java.util.ArrayList;
 
 public class UDPServerThread implements Runnable{
-    public DatagramSocket getSocket() {
-        return socket;
-    }
-
     private  DatagramSocket socket;
+
     private  DatagramPacket packet, sendPacket;
     private  byte[] buffer, sendData;
     private static ArrayList<Chat>chats;
     private  int port;
     private static boolean running;
-
     UDPServerThread(){
         running = true;
         buffer = new byte[1024];
@@ -70,6 +66,10 @@ public class UDPServerThread implements Runnable{
             }
             socket.close();
         }
+    }
+
+    public DatagramSocket getSocket() {
+        return socket;
     }
     private void sendToGUI(String s){
         GUIController.receivedShow(s);

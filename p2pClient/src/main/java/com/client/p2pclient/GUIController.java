@@ -72,32 +72,28 @@ public class GUIController implements Initializable {
     }
     @FXML
     void login(ActionEvent event) throws IOException {
-        String name = usernameTestBox.getText();
-        MainClass.mainUser.setUsername(name);
-        String password = passwordTextBox.getText();
-        passwordTextBox.setText("");
-        String serverIP = ServerIP.getText();
+        String name = usernameTestBox.getText(), password = passwordTextBox.getText(), serverIP = ServerIP.getText(), hostname = "";
         int serverPort = Integer.parseInt(ServerPort.getText());
-        String msg = "login%" + name + "%" + password;
+        InetAddress ip;
+        try {
+            ip = InetAddress.getLocalHost();
+            hostname = ip.getHostAddress();
+            MainClass.mainUser.setIP(hostname);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        MainClass.mainUser.setUsername(name);
+        passwordTextBox.setText("");
+        String msg = "login%" + name + "%" + password + "%" + hostname;
         String response = MainClass.helper.sendToServer(serverIP, serverPort, msg);
         if(response.equals("failed")){
             JOptionPane.showMessageDialog(new JFrame(),"Wrong username or password","Alert",JOptionPane.ERROR_MESSAGE);
         }
         else{
             MainClass.mainUser.setTCPServerIP(serverIP);
-            MainClass.mainUser.createUDPThraed();
-            InetAddress ip;
-            String hostname;
+            MainClass.mainUser.createUDPThread();
             Status.setText("Logged in successfully.");
-            try {
-                ip = InetAddress.getLocalHost();
-                hostname = ip.getHostAddress();
-                MainClass.mainUser.setIP(hostname);
-                LocalIP.setText(hostname);
-                //Local port edit
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            }
+            LocalIP.setText(hostname);
             LocalPort.setText(String.valueOf(MainClass.mainUser.getPort()));
             loginEnable();
         }
@@ -107,7 +103,7 @@ public class GUIController implements Initializable {
         String name = usernameTestBox.getText();
         String serverIP = ServerIP.getText();
         int serverPort = Integer.parseInt(ServerPort.getText());
-        String msg = "logout%" + name;
+        String msg = "logout%" + name + "%" + MainClass.mainUser.getIP();
         MainClass.helper.sendToServer(serverIP, serverPort, msg);
         logoutEnable();
         clearAll();
