@@ -26,11 +26,12 @@ public class User {
     public String getIP() {
         return IP;
     }
-    public void setPort() throws IOException {
+    public void setPort(int noPort) throws IOException {
         for(int ports = 1 ; ports <= 9999; ports++){
             try {
                 DatagramSocket tmp = new DatagramSocket(ports);
                 tmp.close();
+                if(ports==noPort)continue;
                 this.port = ports;
                 return;
             } catch (IOException ex) {
@@ -46,10 +47,13 @@ public class User {
         this.TCPServerIP = TCPServerIP;
     }
     public void createUDPThread() throws IOException {
-        if(UDPServer != null && !UDPServer.getSocket().isClosed())
+        int noPort = 0;
+        if(UDPServer != null && !UDPServer.getSocket().isClosed()){
+            noPort = getPort();
             UDPServer.getSocket().close();
+        }
         UDPServer = new UDPServerThread();
-        setPort();
+        setPort(noPort);
         UDPServer.setPort(port);
         Thread thread = new Thread(UDPServer);
         thread.start();

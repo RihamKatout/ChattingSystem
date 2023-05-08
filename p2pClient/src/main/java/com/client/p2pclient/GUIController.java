@@ -27,7 +27,7 @@ public class GUIController implements Initializable {
     @FXML
     private TextField LocalIP, LocalPort, RemoteIP, RemotePort, ServerIP, ServerPort, passwordTextBox, usernameTestBox, Status;
     @FXML
-    private Button loginButton, logoutButton, connectButton, sendButton;
+    private Button loginButton, logoutButton, connectButton, sendButton, updateButton;
     @FXML
     private TextArea messageBox;
     @FXML
@@ -53,6 +53,7 @@ public class GUIController implements Initializable {
         connectButton.setDisable(false);
         sendButton.setDisable(false);
         messageBox.setDisable(false);
+        updateButton.setDisable(false);
     }
     private void logoutEnable(){
         usernameTestBox.setDisable(false);
@@ -66,6 +67,7 @@ public class GUIController implements Initializable {
         connectButton.setDisable(true);
         sendButton.setDisable(true);
         messageBox.setDisable(true);
+        updateButton.setDisable(true);
     }
     private void clearAll(){
         messageBox.setText("");
@@ -150,6 +152,19 @@ public class GUIController implements Initializable {
             }
         }
     }
+    public static void receivedShow(String s){
+        Platform.runLater(() -> {
+            Node label = new Label(s);
+            label.setStyle("-fx-text-fill: green;");
+            label.setOnMouseClicked(event->selectNode(label));
+            messagesArea2.getChildren().add(label);
+        });
+    }
+    @FXML
+    void update(ActionEvent e) throws IOException {
+        MainClass.mainUser.createUDPThread();
+        LocalPort.setText(String.valueOf(MainClass.mainUser.getPort()));
+    }
     @FXML
     void connectServerAndDest(ActionEvent event) throws UnknownHostException, SocketException, InterruptedException {
 //        MainClass.threadServer.interrupt();
@@ -171,14 +186,7 @@ public class GUIController implements Initializable {
         Thread threadServer = new Thread(UDPServer,"serverThread");
         threadServer.start();
     }
-    public static void receivedShow(String s){
-        Platform.runLater(() -> {
-            Node label = new Label(s);
-            label.setStyle("-fx-text-fill: green;");
-            label.setOnMouseClicked(event->selectNode(label));
-            messagesArea2.getChildren().add(label);
-        });
-    }
+
     public static void onlineUpdate(String s){
         onlineArea2.getChildren().removeAll();
         Platform.runLater(() -> {
