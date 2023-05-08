@@ -1,4 +1,3 @@
-
 package com.client.p2pclient;
 
 import javafx.application.Platform;
@@ -14,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import javax.swing.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -33,7 +33,6 @@ public class GUIController implements Initializable {
     @FXML
     private VBox messagesArea;
     public static VBox messagesArea2;
-
     @FXML
     private VBox onlineArea;
     public static VBox onlineArea2;
@@ -79,10 +78,8 @@ public class GUIController implements Initializable {
     void login(ActionEvent event) throws IOException {
         String name = usernameTestBox.getText(), password = passwordTextBox.getText(), serverIP = ServerIP.getText(), hostname = "";
         int serverPort = Integer.parseInt(ServerPort.getText());
-        InetAddress ip;
         try {
-            ip = InetAddress.getLocalHost();
-            hostname = ip.getHostAddress();
+            hostname = InetAddress.getLocalHost().getHostAddress();
             MainClass.mainUser.setIP(hostname);
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -114,6 +111,17 @@ public class GUIController implements Initializable {
         clearAll();
     }
     @FXML
+    void onSendButtonClick(ActionEvent eve) throws IOException {
+        UDPClientThread.setFriendIP(RemoteIP.getText());
+        UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
+        UDPClientThread.setSentData(messageBox.getText());
+        UDPClientThread.sendData();
+        Node label = new Label("Me: "+messageBox.getText());
+        label.setStyle("-fx-text-fill: red;");
+        label.setOnMouseClicked(event->selectNode(label));
+        messagesArea.getChildren().add(label);
+    }
+    @FXML
     void onSendButtonClick() throws IOException {
         UDPClientThread.setFriendIP(RemoteIP.getText());
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
@@ -124,12 +132,12 @@ public class GUIController implements Initializable {
         messagesArea.getChildren().add(label);
 
     }
-    private void selectNode(Node node) {
+    private static void selectNode(Node node) {
         deselectAll();
         node.setStyle("-fx-background-color: blue;");
     }
-    private void deselectAll() {
-        for (var child : messagesArea.getChildren()) {
+    private static void deselectAll() {
+        for (var child : messagesArea2.getChildren()) {
             if (child instanceof Label) {
                 ((Label) child).setStyle("-fx-background-color: transparent;");
             }
@@ -158,7 +166,10 @@ public class GUIController implements Initializable {
     }
     public static void receivedShow(String s){
         Platform.runLater(() -> {
-            messagesArea2.getChildren().add(new Label("received : " + s));
+            Node label = new Label(s);
+            label.setStyle("-fx-text-fill: green;");
+            label.setOnMouseClicked(event->selectNode(label));
+            messagesArea2.getChildren().add(label);
         });
     }
     public static void onlineUpdate(String s){

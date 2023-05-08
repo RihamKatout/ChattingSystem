@@ -43,7 +43,7 @@ public class UDPServerThread implements Runnable{
                 message = input.substring(t+1);
                 System.out.println("Received from" + friendUsername + ": " + message);
 
-                sendToGUI(message);
+                sendToGUI(friendUsername + ": " + message);
             }
             socket.close();
         }

@@ -26,11 +26,10 @@ public class UDPClientThread{
 
     public static void setFriendPort(int friendPort) { UDPClientThread.friendPort = friendPort; }
 
-    public static void sendData() throws IOException {
+    public static void sendData() throws IOException{
         socket = new DatagramSocket();
         DatagramPacket sendPacket = new DatagramPacket(sentData, sentData.length, friendIP, friendPort);
         socket.send(sendPacket);
-        System.out.println("Done.-");
         socket.close();
     }
 }
