@@ -5,6 +5,10 @@ import java.net.*;
 import java.util.ArrayList;
 
 public class UDPServerThread implements Runnable{
+    public DatagramSocket getSocket() {
+        return socket;
+    }
+
     private  DatagramSocket socket;
     private  DatagramPacket packet, sendPacket;
     private  byte[] buffer, sendData;
@@ -19,6 +23,7 @@ public class UDPServerThread implements Runnable{
         sendData = new byte[1024];
         packet = new DatagramPacket(buffer, buffer.length);
     }
+
     @Override
     public void run(){
         synchronized(this){
@@ -39,7 +44,13 @@ public class UDPServerThread implements Runnable{
                 int i = checkFriendship(user2);
                 if(i==-1){
                     //create a new chat
-                    i = createChat(user2);
+                    try {
+                        i = createChat(user2);
+                    } catch (SocketException e) {
+                        throw new RuntimeException(e);
+                    } catch (UnknownHostException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 String message = "";
                 for(int t=0;t< input.length;t++)
@@ -64,7 +75,7 @@ public class UDPServerThread implements Runnable{
         }
         return -1;
     }
-    private int createChat(User friend){
+    private int createChat(User friend) throws SocketException, UnknownHostException {
         Chat newChat = new Chat(friend);
         chats.add(newChat);
         return chats.size()-1;

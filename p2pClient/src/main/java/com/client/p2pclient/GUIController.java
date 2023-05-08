@@ -21,6 +21,7 @@ import java.util.Set;
 
 public class GUIController implements Initializable {
 
+
     @FXML
     private TextField LocalIP;
 
@@ -40,12 +41,26 @@ public class GUIController implements Initializable {
     private TextField ServerPort;
 
     @FXML
+    private Button loginButton;
+
+    @FXML
+    private Button logoutButton;
+
+    @FXML
     private TextArea messageBox;
+
     @FXML
     private VBox messagesArea;
-    public static VBox messagesArea2;
+
+    @FXML
+    private TextField passwordTextBox;
+
     @FXML
     private Button testConnectionButton;
+
+    @FXML
+    private TextField usernameTestBox;
+    public static VBox messagesArea2;
 
     @FXML
     void connectServerAndDest(ActionEvent event) throws UnknownHostException, SocketException, InterruptedException {
@@ -83,9 +98,20 @@ public class GUIController implements Initializable {
             messagesArea2.getChildren().add(new Label("received : " + s));
         });
     }
+    @FXML
+    void login(ActionEvent event) {
+        String name = usernameTestBox.getText();
+        String password = passwordTextBox.getText();
+//        Server
+    }
 
+    @FXML
+    void logout(ActionEvent event) {
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         messagesArea2 = messagesArea;
+
     }
 }

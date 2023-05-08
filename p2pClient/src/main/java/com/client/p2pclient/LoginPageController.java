@@ -45,7 +45,6 @@ public class LoginPageController {
         String pass = passwordTextField.getText();
         MainClass.helper.setServerIp("192.168.1.9");
         MainClass.helper.setServerPort(1218);
-
 //
 //        InetAddress ip;
 //        String clientIp;

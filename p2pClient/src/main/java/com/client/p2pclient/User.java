@@ -1,5 +1,9 @@
 package com.client.p2pclient;
 
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
 public class User {
     private String username, IP;
     private int port ;
@@ -7,6 +11,8 @@ public class User {
     private int onlineServerPort ;
     private int UDPServerport;
 
+    private UDPServerThread UDPserver ;
+    private onlineStatusThread onlineThread ;
     private String TCPServerIp ;
 
     public void setTCPServerIp(String TCPServerIp) {
@@ -21,10 +27,13 @@ public class User {
         this.onlineServerPort = onlineServerPort;
     }
 
-    User(){
+    User() throws SocketException, UnknownHostException {
         IP = username = null;
         port = 0 ;
+        UDPserver = new UDPServerThread();
     }
+
+
     User(String IP, int port){
         this.IP = IP;
         this.port = port;
@@ -33,6 +42,13 @@ public class User {
         this(IP, port);
         this.username = username;
     }
+    void createUDPThraed(int port) throws SocketException, UnknownHostException {
+//        UDPserver.setPort(port);
+        if(!UDPserver.getSocket().isClosed())
+            UDPserver.getSocket().close();
+        UDPserver.getSocket().connect(InetAddress.getByName((InetAddress.getLocalHost().getHostAddress())),port);
+    }
+
     public String getIP() {
         return IP;
     }

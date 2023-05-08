@@ -1,5 +1,7 @@
 package com.client.p2pclient;
 
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 
@@ -8,13 +10,13 @@ public class Chat {
     private ArrayList<String> sentMessages, receivedMessages;
     private ArrayList<Boolean>sentOrReceived; //true => sent, false => received
 
-    Chat(){
+    Chat() throws SocketException, UnknownHostException {
         friend = new User();
         sentMessages = new ArrayList<String>();
         receivedMessages = new ArrayList<String>();
         sentOrReceived = new ArrayList<Boolean>();
     }
-    Chat(User friend){
+    Chat(User friend) throws SocketException, UnknownHostException {
         this();
         this.friend = friend;
     }

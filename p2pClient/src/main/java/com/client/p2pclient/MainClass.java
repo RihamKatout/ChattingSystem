@@ -12,12 +12,11 @@ public class MainClass extends Application  {
     public static User mainUser ;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("loginPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("GUI.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("loginPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 300, 450);
         stage.setTitle("login");
         stage.setScene(scene);
-
         stage.show();
 //        test
     }
