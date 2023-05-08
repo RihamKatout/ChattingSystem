@@ -113,12 +113,21 @@ public class GUIController implements Initializable {
         logoutEnable();
         clearAll();
     }
+    @FXML
+    void onSendButtonClick() throws IOException {
+        UDPClientThread.setFriendIP(RemoteIP.getText());
+        UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
+        UDPClientThread.setSentData(messageBox.getText());
+        UDPClientThread.sendData();
+        Node label = new Label("Me : " + messageBox.getText());
+        label.setOnMouseClicked(event -> selectNode(label));
+        messagesArea.getChildren().add(label);
 
+    }
     private void selectNode(Node node) {
         deselectAll();
         node.setStyle("-fx-background-color: blue;");
     }
-
     private void deselectAll() {
         for (var child : messagesArea.getChildren()) {
             if (child instanceof Label) {
@@ -142,20 +151,10 @@ public class GUIController implements Initializable {
         //MainClass.helper.setServerIP(ServerIP.getText());
         //MainClass.helper.setServerPort(Integer.parseInt(ServerPort.getText()));
         UDPServer.setPort(Integer.parseInt(LocalPort.getText()));
-        UDPClientThread.setFriendIP(InetAddress.getByName(RemoteIP.getText()));
+        UDPClientThread.setFriendIP(RemoteIP.getText());
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
         Thread threadServer = new Thread(UDPServer,"serverThread");
         threadServer.start();
-    }
-    @FXML
-    void onSendButtonClick() throws IOException {
-//        prepare IPs, ports & sendData
-//        UDPClientThread.setSentData(messageBox.getText().getBytes());
-//        UDPClientThread.sendData();
-        Node label = new Label("Me : " + messageBox.getText());
-        label.setOnMouseClicked(event -> selectNode(label));
-        messagesArea.getChildren().add(label);
-
     }
     public static void receivedShow(String s){
         Platform.runLater(() -> {
