@@ -32,6 +32,16 @@
                </VBox.margin>
             </TextField>
             <Button fx:id="loginButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Log in" />
+            <Label fx:id="UserNotFoundLabel" text="User Not Found" textFill="RED" visible="false">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="CreateUserButton" mnemonicParsing="false" onAction="#CreateUser" text="Create User" visible="false">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>

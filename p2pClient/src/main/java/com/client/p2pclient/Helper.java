@@ -3,9 +3,10 @@ package com.client.p2pclient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerHelper {
+public class Helper {
     private  Socket clientSocketLogIn , clientSocketStatus ;
     private  OutputStream outputStreamLogIn,outputStreamStatus;
     private  InputStream inputStreamLogIn,inputStreamStatus;
@@ -30,8 +31,17 @@ public class ServerHelper {
     }
 
 
-
-    ServerHelper() throws IOException {
+    public static ServerSocket createSocket() throws IOException {
+        for(int ports = 1 ; ports <= 9999; ports++){
+            try {
+                return new ServerSocket(ports);
+            } catch (IOException ex) {
+                continue;
+            }
+        }
+        throw new IOException("no free port found");
+    }
+    Helper() throws IOException {
 
 
     }

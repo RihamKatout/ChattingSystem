@@ -8,30 +8,23 @@ import javafx.stage.Stage;
 import java.io.*;
 
 public class MainClass extends Application  {
-    public static ServerHelper serverHelper;
+    public static Helper helper;
     public static User mainUser ;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("GUI.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("loginPage.fxml"));
 //        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("loginPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
-        stage.setTitle("messenger");
+        Scene scene = new Scene(fxmlLoader.load(), 300, 450);
+        stage.setTitle("login");
         stage.setScene(scene);
-        stage.setMaximized(true);
+
         stage.show();
 //        test
     }
 
     public static void main(String[] args) throws IOException {
 
-
-        mainUser = new User();
-        onlineStatusThread thread = new onlineStatusThread();
-        Thread onlineThread = new Thread(thread);
-        onlineThread.start();
-        serverHelper = new ServerHelper();//172.19.203.142
         launch();
-        onlineThread.interrupt();
         System.exit(0);
     }
 

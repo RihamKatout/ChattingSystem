@@ -27,7 +27,10 @@ public class LoginThread implements Runnable {
                     outputStream = connectionSocket.getOutputStream();
                     InputStream inputStream = connectionSocket.getInputStream();
                     message = HelperFunctions.reader(inputStream) ;
-                    response = Login(message);
+                    if(message.charAt(0)=='$'){
+//                        createUser
+                    }
+                    else response = Login(message);
                     System.out.println(response);
                 } catch (IOException e) {
                     throw new RuntimeException(e);

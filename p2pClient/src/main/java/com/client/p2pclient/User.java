@@ -2,11 +2,28 @@ package com.client.p2pclient;
 
 public class User {
     private String username, IP;
-    private int port;
+    private int port ;
+
+    private int onlineServerPort ;
+    private int UDPServerport;
+
+    private String TCPServerIp ;
+
+    public void setTCPServerIp(String TCPServerIp) {
+        this.TCPServerIp = TCPServerIp;
+    }
+
+    public int getOnlineServerPort() {
+        return onlineServerPort;
+    }
+
+    public void setOnlineServerPort(int onlineServerPort) {
+        this.onlineServerPort = onlineServerPort;
+    }
 
     User(){
         IP = username = null;
-        port = 0;
+        port = 0 ;
     }
     User(String IP, int port){
         this.IP = IP;

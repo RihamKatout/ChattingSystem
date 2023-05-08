@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class onlineStatusThread implements Runnable {
+
+
     private ServerSocket welcomeSocket ;
     private String onlineUsers;
     private Socket connectionSocket;
@@ -12,11 +14,19 @@ public class onlineStatusThread implements Runnable {
     private DataOutputStream outToClient;
     private Boolean running ,response;
     onlineStatusThread() throws IOException {
-        welcomeSocket = new ServerSocket(1478  );
+
         running = true ;
         // test
     }
+    public ServerSocket getWelcomeSocket() {
+        return welcomeSocket;
+    }
 
+    public void setWelcomeSocket() throws IOException {
+
+        this.welcomeSocket = Helper.createSocket();
+        MainClass.mainUser.setOnlineServerPort(welcomeSocket.getLocalPort());
+    }
     @Override
     public void run() {
         synchronized (this) {
@@ -27,7 +37,7 @@ public class onlineStatusThread implements Runnable {
                     outputStream = connectionSocket.getOutputStream();
                     InputStream inputStream = connectionSocket.getInputStream();
 //                    System.out.println("hello");
-                    String onlineUsers = ServerHelper.reader(inputStream);
+                    String onlineUsers = Helper.reader(inputStream);
                     System.out.println(onlineUsers);
                 } catch (IOException e) {
                     throw new RuntimeException(e);

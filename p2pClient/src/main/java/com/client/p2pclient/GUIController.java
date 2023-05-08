@@ -60,8 +60,8 @@ public class GUIController implements Initializable {
             }
         }
         UDPServerThread UDPServer = new UDPServerThread();
-        MainClass.serverHelper.setServerIp(ServerIP.getText());
-        MainClass.serverHelper.setServerPort(Integer.parseInt(ServerPort.getText()));
+        MainClass.helper.setServerIp(ServerIP.getText());
+        MainClass.helper.setServerPort(Integer.parseInt(ServerPort.getText()));
         UDPServer.setPort(Integer.parseInt(LocalPort.getText()));
         UDPClientThread.setFriendIP(InetAddress.getByName(RemoteIP.getText()));
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
