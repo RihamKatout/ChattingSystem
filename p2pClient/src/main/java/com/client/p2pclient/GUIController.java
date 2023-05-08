@@ -1,4 +1,3 @@
-
 package com.client.p2pclient;
 
 import javafx.application.Platform;
@@ -33,7 +32,6 @@ public class GUIController implements Initializable {
     @FXML
     private VBox messagesArea;
     public static VBox messagesArea2;
-
     @FXML
     private VBox onlineArea;
     public static VBox onlineArea2;
@@ -79,10 +77,8 @@ public class GUIController implements Initializable {
     void login(ActionEvent event) throws IOException {
         String name = usernameTestBox.getText(), password = passwordTextBox.getText(), serverIP = ServerIP.getText(), hostname = "";
         int serverPort = Integer.parseInt(ServerPort.getText());
-        InetAddress ip;
         try {
-            ip = InetAddress.getLocalHost();
-            hostname = ip.getHostAddress();
+            hostname = InetAddress.getLocalHost().getHostAddress();
             MainClass.mainUser.setIP(hostname);
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -114,12 +110,14 @@ public class GUIController implements Initializable {
         clearAll();
     }
     @FXML
-    void onSendButtonClick(ActionEvent event) throws IOException {
+    void onSendButtonClick(ActionEvent eve) throws IOException {
         UDPClientThread.setFriendIP(RemoteIP.getText());
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
         UDPClientThread.setSentData(messageBox.getText());
         UDPClientThread.sendData();
-        messagesArea.getChildren().add(new Label("Me : " + messageBox.getText()));
+        Node label = new Label("Me: "+messageBox.getText());
+        label.setOnMouseClicked(event->selectNode(label));
+        messagesArea.getChildren().add(label);
     }
     @FXML
     void onSendButtonClick() throws IOException {

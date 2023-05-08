@@ -1,10 +1,7 @@
 package com.client.p2pclient;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 
 public class User {
     private String username, IP, TCPServerIP;
@@ -32,7 +29,7 @@ public class User {
     public void setPort() throws IOException {
         for(int ports = 1 ; ports <= 9999; ports++){
             try {
-                ServerSocket tmp = new ServerSocket(ports);
+                DatagramSocket tmp = new DatagramSocket(ports);
                 tmp.close();
                 this.port = ports;
                 return;
@@ -54,7 +51,6 @@ public class User {
         UDPServer = new UDPServerThread();
         setPort();
         UDPServer.setPort(port);
-        UDPServer.getSocket().connect(InetAddress.getByName((InetAddress.getLocalHost().getHostAddress())),port);
         Thread thread = new Thread(UDPServer);
         thread.start();
         System.out.println("UDP created successfully");
