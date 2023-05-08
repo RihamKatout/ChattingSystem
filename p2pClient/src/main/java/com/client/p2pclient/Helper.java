@@ -1,49 +1,37 @@
 package com.client.p2pclient;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Helper {
-    private  Socket clientSocketLogIn , clientSocketStatus ;
-    private  OutputStream outputStreamLogIn,outputStreamStatus;
-    private  InputStream inputStreamLogIn,inputStreamStatus;
-    private String serverIp ;
+    private  Socket TCPSocket;
+    private String serverIP;
     private int serverPort;
+    private InputStream inFromServer;
+    private OutputStream outToServer;
 
-
-    public String getServerIp() {
-        return serverIp;
+    public String getServerIP() {
+        return serverIP;
     }
 
     public int getServerPort() {
         return serverPort;
     }
 
-    public void setServerIp(String serverIp) {
-        this.serverIp = serverIp;
+    private void setServerIP(String serverIp) {
+        this.serverIP = serverIp;
     }
 
-    public void setServerPort(int serverPort) {
+    private void setServerPort(int serverPort) {
         this.serverPort = serverPort;
     }
 
-
-    public static ServerSocket createSocket() throws IOException {
-        for(int ports = 1 ; ports <= 9999; ports++){
-            try {
-                return new ServerSocket(ports);
-            } catch (IOException ex) {
-                continue;
-            }
-        }
-        throw new IOException("no free port found");
-    }
-    Helper() throws IOException {
-
-
+    private Socket createSocket(String serverIP, int serverPort) throws IOException {
+        setServerIP(serverIP);
+        setServerPort(serverPort);
+        TCPSocket = new Socket(getServerIP(), getServerPort());
+        return TCPSocket;
     }
     public static  String reader(InputStream inputStream) throws IOException {
         byte[] buffer = new byte[1024];
@@ -51,17 +39,14 @@ public class Helper {
         String response = new String(buffer, 0, bytesRead);
         return response;
     }
-    public String sendToLoginServer(String name ,String password) throws IOException {
-        if(name.contains(",")||password.contains(",")||name.contains("$")||password.contains("$"))
-                return "failed";
-        clientSocketLogIn = new Socket(serverIp, serverPort);
-        outputStreamLogIn = clientSocketLogIn.getOutputStream();
-        inputStreamLogIn = clientSocketLogIn.getInputStream();
-        String req = name + ','+password;
-        outputStreamLogIn.write(req.getBytes());
-        String answer = reader(inputStreamLogIn) ;
+    public String sendToServer(String IP ,int port, String message) throws IOException {
+        createSocket(IP, port);
+        inFromServer = TCPSocket.getInputStream();
+        outToServer = TCPSocket.getOutputStream();
+        outToServer.write(message.getBytes());
+        String answer = reader(inFromServer);
         System.out.println("Server response: " + answer);
-        clientSocketLogIn.close();
+        TCPSocket.close();
         return answer ;
     }
 }

@@ -24,7 +24,7 @@ public class onlineStatusThread implements Runnable {
 
     public void setWelcomeSocket() throws IOException {
 
-        this.welcomeSocket = Helper.createSocket();
+        //this.welcomeSocket = Helper.createSocket();
         MainClass.mainUser.setOnlineServerPort(welcomeSocket.getLocalPort());
     }
     @Override

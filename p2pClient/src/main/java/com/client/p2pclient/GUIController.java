@@ -11,6 +11,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -19,49 +21,97 @@ import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+
 public class GUIController implements Initializable {
-
-
     @FXML
-    private TextField LocalIP;
-
+    private TextField LocalIP, LocalPort, RemoteIP, RemotePort, ServerIP, ServerPort, passwordTextBox, usernameTestBox, Status;
     @FXML
-    private TextField LocalPort;
-
-    @FXML
-    private TextField RemoteIP;
-
-    @FXML
-    private TextField RemotePort;
-
-    @FXML
-    private TextField ServerIP;
-
-    @FXML
-    private TextField ServerPort;
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
-    private Button logoutButton;
-
+    private Button loginButton, logoutButton, connectButton, sendButton;
     @FXML
     private TextArea messageBox;
-
     @FXML
     private VBox messagesArea;
-
-    @FXML
-    private TextField passwordTextBox;
-
-    @FXML
-    private Button testConnectionButton;
-
-    @FXML
-    private TextField usernameTestBox;
     public static VBox messagesArea2;
-
+    private void loginEnable(){
+        usernameTestBox.setDisable(true);
+        passwordTextBox.setDisable(true);
+        loginButton.setDisable(true);
+        logoutButton.setDisable(false);
+        ServerIP.setDisable(true);
+        ServerPort.setDisable(true);
+        RemoteIP.setDisable(false);
+        RemotePort.setDisable(false);
+        connectButton.setDisable(false);
+        sendButton.setDisable(false);
+        messageBox.setDisable(false);
+    }
+    private void logoutEnable(){
+        usernameTestBox.setDisable(false);
+        passwordTextBox.setDisable(false);
+        loginButton.setDisable(false);
+        logoutButton.setDisable(true);
+        ServerIP.setDisable(false);
+        ServerPort.setDisable(false);
+        RemoteIP.setDisable(true);
+        RemotePort.setDisable(true);
+        connectButton.setDisable(true);
+        sendButton.setDisable(true);
+        messageBox.setDisable(true);
+    }
+    private void clearAll(){
+        messageBox.setText("");
+        usernameTestBox.setText("");
+        passwordTextBox.setText("");
+        ServerIP.setText("");
+        ServerPort.setText("");
+        LocalIP.setText("");
+        LocalPort.setText("");
+        RemoteIP.setText("");
+        RemotePort.setText("");
+        Status.setText("");
+    }
+    @FXML
+    void login(ActionEvent event) throws IOException {
+        String name = usernameTestBox.getText();
+        MainClass.mainUser.setUsername(name);
+        String password = passwordTextBox.getText();
+        passwordTextBox.setText("");
+        String serverIP = ServerIP.getText();
+        int serverPort = Integer.parseInt(ServerPort.getText());
+        String msg = "login%" + name + "%" + password;
+        String response = MainClass.helper.sendToServer(serverIP, serverPort, msg);
+        if(response.equals("failed")){
+            JOptionPane.showMessageDialog(new JFrame(),"Wrong username or password","Alert",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            MainClass.mainUser.setTCPServerIP(serverIP);
+            MainClass.mainUser.createUDPThraed();
+            InetAddress ip;
+            String hostname;
+            Status.setText("Logged in successfully.");
+            try {
+                ip = InetAddress.getLocalHost();
+                hostname = ip.getHostAddress();
+                MainClass.mainUser.setIP(hostname);
+                LocalIP.setText(hostname);
+                //Local port edit
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+            LocalPort.setText(String.valueOf(MainClass.mainUser.getPort()));
+            loginEnable();
+        }
+    }
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+        String name = usernameTestBox.getText();
+        String serverIP = ServerIP.getText();
+        int serverPort = Integer.parseInt(ServerPort.getText());
+        String msg = "logout%" + name;
+        MainClass.helper.sendToServer(serverIP, serverPort, msg);
+        logoutEnable();
+        clearAll();
+    }
     @FXML
     void connectServerAndDest(ActionEvent event) throws UnknownHostException, SocketException, InterruptedException {
 //        MainClass.threadServer.interrupt();
@@ -75,15 +125,14 @@ public class GUIController implements Initializable {
             }
         }
         UDPServerThread UDPServer = new UDPServerThread();
-        MainClass.helper.setServerIp(ServerIP.getText());
-        MainClass.helper.setServerPort(Integer.parseInt(ServerPort.getText()));
+        //MainClass.helper.setServerIP(ServerIP.getText());
+        //MainClass.helper.setServerPort(Integer.parseInt(ServerPort.getText()));
         UDPServer.setPort(Integer.parseInt(LocalPort.getText()));
         UDPClientThread.setFriendIP(InetAddress.getByName(RemoteIP.getText()));
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
         Thread threadServer = new Thread(UDPServer,"serverThread");
         threadServer.start();
     }
-
     @FXML
     void onSendButtonClick(ActionEvent event) throws IOException {
 //        prepare IPs, ports & sendData
@@ -91,27 +140,14 @@ public class GUIController implements Initializable {
         UDPClientThread.sendData();
         messagesArea.getChildren().add(new Label("Me : " + messageBox.getText()));
     }
-
     public static void receivedShow(String s){
         Platform.runLater(() -> {
         // Update UI components here
             messagesArea2.getChildren().add(new Label("received : " + s));
         });
     }
-    @FXML
-    void login(ActionEvent event) {
-        String name = usernameTestBox.getText();
-        String password = passwordTextBox.getText();
-//        Server
-    }
-
-    @FXML
-    void logout(ActionEvent event) {
-
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         messagesArea2 = messagesArea;
-
     }
 }

@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8756d534-1957-4a93-8c71-6b6639d3602b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/p2pClient/src/main/java/com/client/p2pclient/LoginPageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/p2pClient/src/main/resources/com/client/p2pclient/loginPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TCPServer/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TCPServer/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TCPServer/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TCPServer/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/p2pClient/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/p2pClient/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/p2pClient/src/main/java/com/client/p2pclient/HelperFunctions.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/p2pClient/src/main/java/com/client/p2pclient/ServerHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/p2pClient/src/main/java/com/client/p2pclient/ServerHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/p2pClient/src/main/resources/com/client/p2pclient/GUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/p2pClient/src/main/resources/com/client/p2pclient/GUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/p2pClient/target/classes/com/client/p2pclient/GUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/p2pClient/target/classes/com/client/p2pclient/GUI.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="8756d534-1957-4a93-8c71-6b6639d3602b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Projects/ChattingSystem/ChattingSystem",
+    "last_opened_file_path": "C:/Users/Msys/Desktop/Network1/ChattingSystem",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

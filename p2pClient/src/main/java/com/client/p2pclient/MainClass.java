@@ -22,7 +22,8 @@ public class MainClass extends Application  {
     }
 
     public static void main(String[] args) throws IOException {
-
+        helper = new Helper();
+        mainUser = new User();
         launch();
         System.exit(0);
     }

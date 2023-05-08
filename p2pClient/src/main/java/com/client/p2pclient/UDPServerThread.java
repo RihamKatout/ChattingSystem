@@ -16,7 +16,7 @@ public class UDPServerThread implements Runnable{
     private  int port;
     private static boolean running;
 
-    UDPServerThread() throws SocketException, UnknownHostException {
+    UDPServerThread(){
         running = true;
         buffer = new byte[1024];
         chats = new ArrayList<Chat>();
@@ -40,7 +40,14 @@ public class UDPServerThread implements Runnable{
                 int friendPort = packet.getPort();
 
                 //check if the user is a friend
-                User user2 = new User(friendIPAddress.toString(), friendPort);
+                User user2 = null;
+                try {
+                    user2 = new User();
+                } catch (SocketException e) {
+                    throw new RuntimeException(e);
+                } catch (UnknownHostException e) {
+                    throw new RuntimeException(e);
+                }
                 int i = checkFriendship(user2);
                 if(i==-1){
                     //create a new chat
