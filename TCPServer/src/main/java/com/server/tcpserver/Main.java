@@ -12,27 +12,15 @@ import java.net.UnknownHostException;
 public class Main extends Application  {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GUI.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
     public  static void main(String[] args) throws IOException, InterruptedException {
-        InetAddress ip;
-        String hostname;
-        try {
-            ip = InetAddress.getLocalHost();
-            hostname = ip.getHostAddress();
-            System.out.println("Your current IP address : " + hostname);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        LoginThread loginThread = new LoginThread();
-        Thread threadLogin = new Thread(loginThread);
-        threadLogin.start();
+
         launch();
-        threadLogin.interrupt();
         System.exit(0);
     }
 }
