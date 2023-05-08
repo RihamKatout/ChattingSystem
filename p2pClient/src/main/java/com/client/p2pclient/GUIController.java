@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import javax.swing.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -116,6 +117,7 @@ public class GUIController implements Initializable {
         UDPClientThread.setSentData(messageBox.getText());
         UDPClientThread.sendData();
         Node label = new Label("Me: "+messageBox.getText());
+        label.setStyle("-fx-text-fill: red;");
         label.setOnMouseClicked(event->selectNode(label));
         messagesArea.getChildren().add(label);
     }
@@ -130,12 +132,12 @@ public class GUIController implements Initializable {
         messagesArea.getChildren().add(label);
 
     }
-    private void selectNode(Node node) {
+    private static void selectNode(Node node) {
         deselectAll();
         node.setStyle("-fx-background-color: blue;");
     }
-    private void deselectAll() {
-        for (var child : messagesArea.getChildren()) {
+    private static void deselectAll() {
+        for (var child : messagesArea2.getChildren()) {
             if (child instanceof Label) {
                 ((Label) child).setStyle("-fx-background-color: transparent;");
             }
@@ -164,7 +166,10 @@ public class GUIController implements Initializable {
     }
     public static void receivedShow(String s){
         Platform.runLater(() -> {
-            messagesArea2.getChildren().add(new Label("received : " + s));
+            Node label = new Label(s);
+            label.setStyle("-fx-text-fill: green;");
+            label.setOnMouseClicked(event->selectNode(label));
+            messagesArea2.getChildren().add(label);
         });
     }
     public static void onlineUpdate(String s){
