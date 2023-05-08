@@ -114,6 +114,14 @@ public class GUIController implements Initializable {
         clearAll();
     }
     @FXML
+    void onSendButtonClick(ActionEvent event) throws IOException {
+        UDPClientThread.setFriendIP(RemoteIP.getText());
+        UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
+        UDPClientThread.setSentData(messageBox.getText());
+        UDPClientThread.sendData();
+        messagesArea.getChildren().add(new Label("Me : " + messageBox.getText()));
+    }
+    @FXML
     void onSendButtonClick() throws IOException {
         UDPClientThread.setFriendIP(RemoteIP.getText());
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
