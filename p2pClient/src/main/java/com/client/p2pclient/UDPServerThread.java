@@ -31,12 +31,16 @@ public class UDPServerThread implements Runnable{
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                String []input = (new String(packet.getData(), 0, packet.getLength())).split("_");
-                String message = "";
-                for(int t=0;t< input.length;t++)
-                    message+=input[t];
-
-                System.out.println(message);
+                int t=0;
+                String input = (new String(packet.getData(), 0, packet.getLength()));
+                String message = "", friendUsername = "";
+                for(;t< input.length();t++) {
+                    if(input.charAt(t) == ',')
+                        break;
+                    friendUsername+=input.charAt(t);
+                }
+                message = input.substring(t+1);
+                System.out.println("Received from" + friendUsername + ": " + message);
 
                 sendToGUI(message);
             }
@@ -51,6 +55,8 @@ public class UDPServerThread implements Runnable{
     }
     public void setPort(int Port) throws SocketException {
         port = Port;
+        if(socket!=null && !socket.isClosed())
+            socket.close();
         socket = new DatagramSocket(port);
     }
 }
