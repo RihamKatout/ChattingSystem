@@ -40,7 +40,7 @@ public class UDPServerThread implements Runnable{
                     friendUsername+=input.charAt(t);
                 }
                 message = input.substring(t+1);
-                System.out.println("Received from" + friendUsername + ": " + message);
+                System.out.println("Received from " + friendUsername + ": " + message);
 
                 sendToGUI(friendUsername + ": " + message);
             }
