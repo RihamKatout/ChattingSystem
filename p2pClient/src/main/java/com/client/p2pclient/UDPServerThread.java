@@ -28,6 +28,7 @@ public class UDPServerThread implements Runnable{
                 //receivedData Form : username_message
                 try {
                     socket.receive(packet);
+                    System.out.println("received");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -54,9 +55,12 @@ public class UDPServerThread implements Runnable{
         GUIController.receivedShow(s);
     }
     public void setPort(int Port) throws SocketException {
+
         port = Port;
-        if(socket!=null && !socket.isClosed())
-            socket.close();
+        if(socket!=null )
+            if(!socket.isClosed())
+                socket.close();
+        System.out.println(port);
         socket = new DatagramSocket(port);
     }
 }
