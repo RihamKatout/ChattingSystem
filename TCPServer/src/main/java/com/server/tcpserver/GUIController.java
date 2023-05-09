@@ -23,69 +23,35 @@ public class GUIController implements Initializable {
 
     @FXML
     private Button listenButton;
-
     @FXML
-    private VBox logArea;
-    public static VBox logAreaGlobal;
-
+    private VBox logArea, onlineArea;
+    public static VBox logAreaGlobal, onlineAreaGlobal;
     @FXML
-    private VBox onlineArea;
-    private static VBox onlineAreaGlobal;
-
+    private TextArea portTextBox;
     @FXML
-    private TextArea portTextbox;
-
-    @FXML
-    private Label statusLabel;
-    @FXML
-    private Label unvalidPort;
-
+    private Label statusLabel, unvalidPort;
     private TCPServerThread TCPServerThread;
-    private Thread TCPThread ;
-
-    private Boolean validPort(String port)  {
-        if(port.length()!=4)
-            return false ;
-        try {
-            ServerSocket temp = new ServerSocket(Integer.parseInt(port));
-            temp.close();
-        } catch (Exception ex) {
-            return false;
-        }
-        return true ;
-    }
+    private Thread TCPThread;
     private static SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
     private static Date date = new Date();
-    public static void newLog(String s){
-        date = new Date() ;
-        Platform.runLater(() -> {
-            logAreaGlobal.getChildren().add(new Label(s + "- " + formatter.format(date)));
-        });
-    }
-    public static void newOnlineUser(String s){
-        Platform.runLater(() -> {
-            onlineAreaGlobal.getChildren().add(new Label(s));
-//            Label x = new Label("g");
-        });
-    }
-    public static void deleteOnlineUser(String s){
-        Platform.runLater(() -> {
-            for(Node onlineUser: onlineAreaGlobal.getChildren()){
-                if (onlineUser instanceof Label) {
-                    Label label = (Label) onlineUser;
-                    if (label.getText().equals(s)) {
-                        onlineAreaGlobal.getChildren().remove(label);
-                        break;
-                    }
-                }
-            }
-        });
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        InetAddress ip;
+        String hostname = "null";
+        try {
+            ip = InetAddress.getLocalHost();
+            hostname = ip.getHostAddress();
+        } catch (UnknownHostException e) {
+
+        }
+        statusLabel.setText(hostname);
+        logAreaGlobal = logArea ;
+        onlineAreaGlobal = onlineArea ;
     }
     @FXML
     void listening(ActionEvent event) throws IOException {
-        String port = portTextbox.getText();
+        String port = portTextBox.getText();
         unvalidPort.setVisible(false);
-
         if(!validPort(port)){
             unvalidPort.setVisible(true);
             return ;
@@ -100,20 +66,39 @@ public class GUIController implements Initializable {
         TCPThread.start();
         System.out.println("valid");
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        InetAddress ip;
-        String hostname = "null";
+    private Boolean validPort(String port)  {
+        if(port.length()!=4)
+            return false ;
         try {
-            ip = InetAddress.getLocalHost();
-            hostname = ip.getHostAddress();
-//            System.out.println("Your current IP address : " + hostname);
-        } catch (UnknownHostException e) {
-
+            ServerSocket temp = new ServerSocket(Integer.parseInt(port));
+            temp.close();
+        } catch (Exception ex) {
+            return false;
         }
-        statusLabel.setText(hostname);
-        logAreaGlobal = logArea ;
-        onlineAreaGlobal = onlineArea ;
+        return true ;
+    }
+    public static void newLog(String s){
+        date = new Date() ;
+        Platform.runLater(() -> {
+            logAreaGlobal.getChildren().add(new Label(s + "- " + formatter.format(date)));
+        });
+    }
+    public static void newOnlineUser(String s){
+        Platform.runLater(() -> {
+            onlineAreaGlobal.getChildren().add(new Label(s));
+        });
+    }
+    public static void deleteOnlineUser(String s){
+        Platform.runLater(() -> {
+            for(Node onlineUser: onlineAreaGlobal.getChildren()){
+                if (onlineUser instanceof Label) {
+                    Label label = (Label) onlineUser;
+                    if (label.getText().equals(s)) {
+                        onlineAreaGlobal.getChildren().remove(label);
+                        break;
+                    }
+                }
+            }
+        });
     }
 }

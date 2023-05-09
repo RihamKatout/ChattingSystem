@@ -53,10 +53,13 @@ public class UDPServerThread implements Runnable{
     private void sendToGUI(String s){
         GUIController.receivedShow(s);
     }
-    public void setPort(int Port) throws SocketException {
+    public void setPort(int Port) throws IOException {
         port = Port;
         if(socket!=null && !socket.isClosed())
             socket.close();
         socket = new DatagramSocket(port);
+        String msg = "port%" + MainClass.mainUser.getUsername() + "%" + MainClass.mainUser.getPort();
+        String response = MainClass.helper.sendToServer(MainClass.helper.getServerIP(), MainClass.helper.getServerPort(), msg);
+        System.out.println(response);
     }
 }

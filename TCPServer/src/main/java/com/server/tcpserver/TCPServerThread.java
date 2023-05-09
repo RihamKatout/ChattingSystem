@@ -71,13 +71,16 @@ public class TCPServerThread implements Runnable {
                     String data[] = message.split("%");
                     System.out.println(data[0]);
                     if(data[0].equals("login")) {
-                        response = Login(data[1] + ',' + data[2]+','+data[3]);
+                        response = Login(data[1] + ',' + data[2] + ',' + data[3]);
 
                     } else if (data[0].equals("status")) {
                         GUIController.newLog(data[1]);
                         response = "failed";
                     } else if (data[0].equals("logout")) {
-                        response = Logout(data[1],data[2]);
+                        response = Logout(data[1],data[2], Integer.parseInt(data[3]));
+                    }
+                    else if(data[0].equals("port")){
+                        response = updatePort(data[1], Integer.parseInt(data[2]));
                     }
                     System.out.println(response);
 
@@ -107,7 +110,8 @@ public class TCPServerThread implements Runnable {
                 if (dataBase[0].equals(clientValues[0]) && dataBase[1].equals(clientValues[1]) ) //validating name and password
                 {
                     System.out.println("hi "+line);
-                    GUIController.newOnlineUser( dataBase[0]);//connectionSocket.getInetAddress().getHostAddress()
+                    OnlineStatus.newOnlineUser(new User(clientValues[0], clientValues[2]));
+//                    GUIController.newOnlineUser( dataBase[0]);//connectionSocket.getInetAddress().getHostAddress()
 //                    OnlineStatus.newOnlineUser(line);
                     response = "success";
                     break;
@@ -121,32 +125,40 @@ public class TCPServerThread implements Runnable {
 
         if (response.equals("success")){
             GUIController.newLog(clientValues[0] + " just logged in");
-            updateDataBase(clientValues[0],clientValues[2],"123");
+//            updateDataBase(clientValues[0],clientValues[2],"123");
 //            OnlineStatus.newOnlineUser(clientValues[0]+','+clientValues[2] +','+ clientValues[4]); // 4 is the udp port
         }
         return response ;
     }
-    String Logout(String name,String IP){
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader("src/main/resources/DataBase.txt"));
-            String line = reader.readLine();
-            while (line != null) {
-                String dataBase[] = line.split(",");
-                if (dataBase[0].equals(name) && dataBase[2].equals(IP)) //validating name and password
-                {
-//                    OnlineStatus.logOutUser(line);
-                    GUIController.deleteOnlineUser(name);
-                    GUIController.newLog(name + " just logged out");
-                    break;
-                }
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    String Logout(String name,String IP, int port) throws IOException {
+//        BufferedReader reader;
+//        try {
+//            reader = new BufferedReader(new FileReader("src/main/resources/DataBase.txt"));
+//            String line = reader.readLine();
+//            while (line != null) {
+//                String dataBase[] = line.split(",");
+//                if (dataBase[0].equals(name) && dataBase[2].equals(IP)) //validating name and password
+//                {
+////                    OnlineStatus.logOutUser(line);
+//                    GUIController.deleteOnlineUser(name);
+//                    GUIController.newLog(name + " just logged out");
+//                    break;
+//                }
+//                line = reader.readLine();
+//            }
+//            reader.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
+        OnlineStatus.logOutUser(new User(name, IP, port));
+        GUIController.newLog(name + " just logged out");
         return "logged out";
+    }
+    String updatePort(String name, int port){
+        if(OnlineStatus.updatePort(name, port))
+            return "port updated successfully";
+        else
+            return "couldn't update the port";
     }
 }

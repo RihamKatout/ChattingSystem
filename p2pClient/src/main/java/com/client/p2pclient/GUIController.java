@@ -112,7 +112,7 @@ public class GUIController implements Initializable {
         String name = usernameTestBox.getText();
         String serverIP = ServerIP.getText();
         int serverPort = Integer.parseInt(ServerPort.getText());
-        String msg = "logout%" + name + "%" + MainClass.mainUser.getIP();
+        String msg = "logout%" + name + "%" + MainClass.mainUser.getIP() + "%" + MainClass.mainUser.getPort();
         MainClass.helper.sendToServer(serverIP, serverPort, msg);
         messagesArea2.getChildren().clear();
         messagesArea.getChildren().clear();
@@ -164,9 +164,10 @@ public class GUIController implements Initializable {
     void update(ActionEvent e) throws IOException {
         MainClass.mainUser.createUDPThread();
         LocalPort.setText(String.valueOf(MainClass.mainUser.getPort()));
+        Status.setText("Port updated successfully.");
     }
     @FXML
-    void connectServerAndDest(ActionEvent event) throws UnknownHostException, SocketException, InterruptedException {
+    void connectServerAndDest(ActionEvent event) throws IOException, InterruptedException {
 //        MainClass.threadServer.interrupt();
 //        MainClass.threadServer.join();
         Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
