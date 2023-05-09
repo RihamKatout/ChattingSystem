@@ -4,7 +4,24 @@ import java.io.IOException;
 import java.net.*;
 
 public class User {
-    private String username, IP, TCPServerIP;
+    private String username;
+    private String IP;
+
+    public String getTCPServerIP() {
+        return TCPServerIP;
+    }
+
+    private String TCPServerIP;
+
+    public int getTCPServerPort() {
+        return TCPServerPort;
+    }
+
+    public void setTCPServerPort(int TCPServerPort) {
+        this.TCPServerPort = TCPServerPort;
+    }
+
+    private int TCPServerPort;
     private UDPServerThread UDPServer;
     private int onlineServerPort, port;
     private onlineStatusThread onlineThread ;

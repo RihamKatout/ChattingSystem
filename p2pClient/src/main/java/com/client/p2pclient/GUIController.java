@@ -89,16 +89,21 @@ public class GUIController implements Initializable {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        MainClass.mainUser.setTCPServerIP(serverIP);
+        MainClass.mainUser.setTCPServerPort(serverPort);
         MainClass.mainUser.setUsername(name);
         passwordTextBox.setText("");
-        String msg = "login%" + name + "%" + password + "%" + hostname;
+        MainClass.mainUser.createUDPThread();
+        String msg = "login%" + name + "%" + password + "%" + hostname + "%" + MainClass.mainUser.getUDPServer().getPort();
         String response = MainClass.helper.sendToServer(serverIP, serverPort, msg);
         if(response.equals("failed")){
             JOptionPane.showMessageDialog(new JFrame(),"Wrong username or password","Alert",JOptionPane.ERROR_MESSAGE);
         }
         else{
             MainClass.mainUser.setTCPServerIP(serverIP);
-            MainClass.mainUser.createUDPThread();
+            MainClass.mainUser.setTCPServerPort(serverPort);
+            MainClass.mainUser.setTCPServerIP(serverIP);
+//            MainClass.mainUser.createUDPThread();
             Status.setText("Logged in successfully.");
             LocalIP.setText(hostname);
             LocalPort.setText(String.valueOf(MainClass.mainUser.getPort()));

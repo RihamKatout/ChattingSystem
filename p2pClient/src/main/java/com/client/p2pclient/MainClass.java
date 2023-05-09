@@ -14,7 +14,8 @@ public class MainClass extends Application  {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("GUI.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 300, 450);
-        stage.setTitle("login");
+        stage.setTitle("Client");
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
 //        test
@@ -25,6 +26,20 @@ public class MainClass extends Application  {
         mainUser = new User();
 //        Thread UDPThread = new Thread(new UDPServerThread());
 //        UDPThread.start();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+
+                String name = mainUser.getUsername();
+                String serverIP = mainUser.getTCPServerIP();
+                int serverPort = mainUser.getTCPServerPort();
+                String msg = "logout%" + name + "%" + MainClass.mainUser.getIP();
+                try {
+                    MainClass.helper.sendToServer(serverIP, serverPort, msg);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         launch();
         System.exit(0);
     }

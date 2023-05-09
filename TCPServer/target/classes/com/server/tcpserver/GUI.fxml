@@ -23,7 +23,7 @@
          </content>
       </ScrollPane>
       <Button fx:id="listenButton" layoutX="13.0" layoutY="19.0" mnemonicParsing="false" onAction="#listening" text="start Listening" />
-      <TextArea fx:id="portTextBox" layoutX="158.0" layoutY="13.0" prefHeight="0.0" prefWidth="150.0">
+      <TextArea fx:id="portTextbox" layoutX="158.0" layoutY="13.0" prefHeight="0.0" prefWidth="150.0">
          <font>
             <Font size="11.0" />
          </font>
