@@ -198,4 +198,8 @@ public class GUIController implements Initializable {
             }
         });
     }
+    @FXML
+    void onSendAllButtonClick(ActionEvent e){
+
+    }
 }
