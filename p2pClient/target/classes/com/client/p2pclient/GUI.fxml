@@ -209,13 +209,22 @@
                   <Font size="27.0" />
                </font>
             </TextArea>
-            <Button fx:id="sendButton" disable="true" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="45.0" prefWidth="81.0" text="Send">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Button>
+            <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button fx:id="sendAllButton" disable="true" mnemonicParsing="false" onAction="#onSendAllButtonClick" prefHeight="45.0" prefWidth="98.0" text="send to all">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="sendButton" disable="true" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="45.0" prefWidth="81.0" text="Send">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <Button fx:id="updateButton" disable="true" layoutX="1038.0" layoutY="460.0" mnemonicParsing="false" onAction="#update" text="update" />
+      <Button fx:id="updateButton" disable="true" layoutX="1038.0" layoutY="460.0" mnemonicParsing="false" onAction="#updatePort" text="update" />
    </children>
 </AnchorPane>

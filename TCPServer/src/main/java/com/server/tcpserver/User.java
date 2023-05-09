@@ -46,7 +46,7 @@ public class User {
     }
 
     public boolean equals(User user2) {
-        return user2.getUsername().equals(getUsername());
+        return user2.getUsername().equals(getUsername()) && user2.getIP().equals(getIP()) && user2.getPort() == getPort();
     }
 
 }

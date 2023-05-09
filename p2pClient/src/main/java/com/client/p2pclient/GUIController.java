@@ -13,10 +13,8 @@ import javafx.scene.layout.VBox;
 
 import javax.swing.*;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.SocketException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
@@ -161,10 +159,25 @@ public class GUIController implements Initializable {
         });
     }
     @FXML
-    void update(ActionEvent e) throws IOException {
+    void updatePort(ActionEvent e) throws IOException {
         MainClass.mainUser.createUDPThread();
         LocalPort.setText(String.valueOf(MainClass.mainUser.getPort()));
         Status.setText("Port updated successfully.");
+    }
+    public static void onlineUpdate(String s){
+        onlineArea2.getChildren().removeAll();
+        Platform.runLater(() -> {
+            String data[] = s.split("%");
+            for(int i =0 ;i< data.length ; i ++ ){
+                String data2[] = data[i].split(",");
+                onlineArea2.getChildren().add(new Label(data[i]));
+            }
+        });
+    }
+
+    @FXML
+    void onSendAllButtonClick(ActionEvent e){
+
     }
     @FXML
     void connectServerAndDest(ActionEvent event) throws IOException, InterruptedException {
@@ -186,20 +199,5 @@ public class GUIController implements Initializable {
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
         Thread threadServer = new Thread(UDPServer,"serverThread");
         threadServer.start();
-    }
-
-    public static void onlineUpdate(String s){
-        onlineArea2.getChildren().removeAll();
-        Platform.runLater(() -> {
-            String data[] = s.split("$");
-            for(int i =0 ;i< data.length ; i ++ ){
-                String data2[] = data[i].split(",");
-                onlineArea2.getChildren().add(new Label(data[i]));
-            }
-        });
-    }
-    @FXML
-    void onSendAllButtonClick(ActionEvent e){
-
     }
 }

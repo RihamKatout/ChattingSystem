@@ -3,11 +3,12 @@ package com.server.tcpserver;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class OnlineStatus {
-    private static Set<User> onlineUsers = new HashSet<>();
+    private static ArrayList<User> onlineUsers = new ArrayList<>();
 
     private ServerSocket welcomeSocket ;
     private String clientLoginInfo;
@@ -26,7 +27,7 @@ public class OnlineStatus {
 //                if(online.equals(user)) {
 //                    continue;
 //                }
-//                allOnlineUsers += online +'$';
+//                allOnlineUsers += online +'%';
 //            }
 //            String userData[] = user.split(",");
 //            Socket clientSocketStatus = new Socket(userData[1], Integer.parseInt(userData[4]));
@@ -45,7 +46,15 @@ public class OnlineStatus {
     }
     public static void logOutUser(User user) throws IOException {
          GUIController.deleteOnlineUser(user.getUsername());
-         onlineUsers.remove(user);
+         int index=0;
+         for(var user2 : onlineUsers){
+             if(user2.equals(user)){
+                 break;
+             }
+             index++;
+         }
+         onlineUsers.remove(index);
+         System.out.println("deleted");
          updateClients();
     }
     public static boolean updatePort(String name, int port){
