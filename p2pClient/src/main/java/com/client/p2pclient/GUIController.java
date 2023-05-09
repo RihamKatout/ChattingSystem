@@ -134,7 +134,7 @@ public class GUIController implements Initializable {
         UDPClientThread.setFriendPort(Integer.parseInt(RemotePort.getText()));
         UDPClientThread.setSentData(messageBox.getText());
         UDPClientThread.sendData();
-        Node label = new Label("Me : " + messageBox.getText());
+        Node label = new Label("Me3: " + messageBox.getText());
         label.setOnMouseClicked(event -> selectNode(label));
         messagesArea.getChildren().add(label);
 
