@@ -23,6 +23,7 @@ public class MainClass extends Application  {
 
     public static void main(String[] args) throws IOException {
         helper = new Helper();
+//        mainUser =new User();
 //        Thread UDPThread = new Thread(new UDPServerThread());
 //        UDPThread.start();
         Runtime.getRuntime().addShutdownHook(new Thread() {

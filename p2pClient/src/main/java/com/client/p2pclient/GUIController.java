@@ -25,7 +25,7 @@ public class GUIController implements Initializable {
     @FXML
     private TextField LocalIP, LocalPort, RemoteIP, RemotePort, ServerIP, ServerPort, passwordTextBox, usernameTestBox, Status;
     @FXML
-    private Button loginButton, logoutButton, connectButton, sendButton, updateButton,sendAllButton, DeleteMessegeButton;;
+    private Button loginButton, logoutButton, connectButton, sendButton, updateButton,sendAllButton, DeleteMessegeButton,DeleteAllButton;
     @FXML
     private TextArea messageBox;
     @FXML
@@ -144,11 +144,24 @@ public class GUIController implements Initializable {
         }
     }
     @FXML
+    void DeleteAll(ActionEvent event) throws IOException {
+        for(Node message: messagesArea.getChildren()){
+            if (message instanceof Label) {
+                Label label = (Label) message;
+                MainClass.helper.sendToServer(ServerIP.getText() , Integer.parseInt(ServerPort.getText()),"delete%"+label.getId());
+//                    DeleteMessageByID(label.getId());
+                break;
+
+            }
+        }
+    }
+    @FXML
     void logout(ActionEvent event) throws IOException {
         String name = usernameTestBox.getText();
         String serverIP = ServerIP.getText();
         int serverPort = Integer.parseInt(ServerPort.getText());
         String msg = "logout%" + name + "%" + MainClass.mainUser.getIP() + "%" + MainClass.mainUser.getUDPServerPort();
+        MainClass.helper.sendToServer(serverIP, serverPort, msg);
         MainClass.helper.sendToServer(serverIP, serverPort, msg);
         messagesArea2.getChildren().clear();
         messagesArea.getChildren().clear();
@@ -179,7 +192,7 @@ public class GUIController implements Initializable {
                 System.out.println("Label not found");
             }
         });
-        deselectAll();
+//        deselectAll();
     }
     @FXML
     void DeleteMessage(ActionEvent event) throws IOException {
@@ -205,7 +218,8 @@ public class GUIController implements Initializable {
     private static void deselectAll() {
         for (var child : messagesArea2.getChildren()) {
             if (child instanceof Label) {
-                ((Label) child).setStyle("-fx-background-color: transparent;");
+                if(child!=null)
+                    ((Label) child).setStyle("-fx-background-color: transparent;");
             }
         }
     }
