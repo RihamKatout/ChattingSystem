@@ -1,6 +1,7 @@
 package com.server.tcpserver;
 
 import java.io.*;
+import java.lang.constant.Constable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
@@ -23,7 +24,7 @@ public class TCPServerThread implements Runnable {
         return welcomeSocket;
     }
 
-    private static void updateDataBase(String name , String IP, String port ){
+    private static void updateDataBase(String name , String IP, String UDPport , String OnlinePort ){
         BufferedReader reader; // for reading from a file
         try {
             reader = new BufferedReader(new FileReader("src/main/resources/DataBase.txt"));
@@ -34,7 +35,7 @@ public class TCPServerThread implements Runnable {
                 String dataBase[] = line.split(",");
                 if (dataBase[0].equals(name) )
                 {
-                    content.append(dataBase[0]+','+dataBase[1]+','+IP+','+port);
+                    content.append(dataBase[0]+','+dataBase[1]+','+IP+','+UDPport+','+OnlinePort);
                     content.append(System.lineSeparator());
                 }
                 else arr.add(line);
@@ -71,16 +72,19 @@ public class TCPServerThread implements Runnable {
                     String data[] = message.split("%");
                     System.out.println(data[0]);
                     if(data[0].equals("login")) {
-                        response = Login(data[1] + ',' + data[2] + ',' + data[3]);
+                        response = Login(data[1] + ',' + data[2] + ',' + data[3] + ',' + data[4] +',' +data[5]);
 
                     } else if (data[0].equals("status")) {
                         GUIController.newLog(data[1]);
                         response = "failed";
                     } else if (data[0].equals("logout")) {
-                        response = Logout(data[1],data[2], Integer.parseInt(data[3]));
+                        response = Logout(data[1],data[2]);
                     }
                     else if(data[0].equals("port")){
                         response = updatePort(data[1], Integer.parseInt(data[2]));
+                    }
+                    else if(data[0].equals("delete")){
+                        response = deleteMessage(data[1]);
                     }
                     System.out.println(response);
 
@@ -96,8 +100,20 @@ public class TCPServerThread implements Runnable {
             }
         }
     }
-
+    String deleteMessage(String id ) throws IOException {
+        for (User user : OnlineStatus.onlineUsers) {
+            Socket clientSocketStatus = new Socket(user.getIP(), user.getOnlineStatusPort());
+            OutputStream outputStreamStatus = clientSocketStatus.getOutputStream();
+            InputStream inputStreamStatus = clientSocketStatus.getInputStream();
+            outputStreamStatus.write(("#deleted%"+id).getBytes());
+            System.out.println( HelperFunctions.reader(inputStreamStatus));
+            clientSocketStatus.close();
+        }
+        return "deleted";
+    }
     String Login(String clientLoginInfo) throws IOException {
+        // name,pass,ip,onlinePort,UDPPort
+        // 0   ,1   ,2 ,3         ,4
         System.out.println(clientLoginInfo);
         String response = "failed" ;
         BufferedReader reader; // for reading from a file
@@ -110,9 +126,9 @@ public class TCPServerThread implements Runnable {
                 if (dataBase[0].equals(clientValues[0]) && dataBase[1].equals(clientValues[1]) ) //validating name and password
                 {
                     System.out.println("hi "+line);
-                    OnlineStatus.newOnlineUser(new User(clientValues[0], clientValues[2]));
+                    updateDataBase(clientValues[0],clientValues[2],clientValues[4],clientValues[3]);
+                    OnlineStatus.newOnlineUser(new User(clientValues[0], clientValues[2],Integer.parseInt(clientValues[4]),Integer.parseInt(clientValues[3])));
 //                    GUIController.newOnlineUser( dataBase[0]);//connectionSocket.getInetAddress().getHostAddress()
-//                    OnlineStatus.newOnlineUser(line);
                     response = "success";
                     break;
                 }
@@ -125,37 +141,19 @@ public class TCPServerThread implements Runnable {
 
         if (response.equals("success")){
             GUIController.newLog(clientValues[0] + " just logged in");
-//            updateDataBase(clientValues[0],clientValues[2],"123");
+
 //            OnlineStatus.newOnlineUser(clientValues[0]+','+clientValues[2] +','+ clientValues[4]); // 4 is the udp port
         }
         return response ;
     }
-    String Logout(String name,String IP, int port) throws IOException {
-//        BufferedReader reader;
-//        try {
-//            reader = new BufferedReader(new FileReader("src/main/resources/DataBase.txt"));
-//            String line = reader.readLine();
-//            while (line != null) {
-//                String dataBase[] = line.split(",");
-//                if (dataBase[0].equals(name) && dataBase[2].equals(IP)) //validating name and password
-//                {
-////                    OnlineStatus.logOutUser(line);
-//                    GUIController.deleteOnlineUser(name);
-//                    GUIController.newLog(name + " just logged out");
-//                    break;
-//                }
-//                line = reader.readLine();
-//            }
-//            reader.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    String Logout(String name,String IP) throws IOException {
+//        OnlineStatus.logOutUser(line);
 
-        OnlineStatus.logOutUser(new User(name, IP, port));
+        OnlineStatus.logOutUser(new User(name, IP));
         GUIController.newLog(name + " just logged out");
         return "logged out";
     }
-    String updatePort(String name, int port){
+    String updatePort(String name, int port) throws IOException {
         if(OnlineStatus.updatePort(name, port))
             return "port updated successfully";
         else

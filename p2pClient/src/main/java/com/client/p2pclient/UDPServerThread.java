@@ -2,7 +2,6 @@ package com.client.p2pclient;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.ArrayList;
 
 public class UDPServerThread implements Runnable{
     private  DatagramSocket socket;
@@ -29,7 +28,7 @@ public class UDPServerThread implements Runnable{
                 try {
                     socket.receive(packet);
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("invalid Socket");
                 }
                 int t=0;
                 String input = (new String(packet.getData(), 0, packet.getLength()));
@@ -41,8 +40,8 @@ public class UDPServerThread implements Runnable{
                 }
                 message = input.substring(t+1);
                 System.out.println("Received from " + friendUsername + ": " + message);
-
                 sendToGUI(friendUsername + ": " + message);
+
             }
             socket.close();
         }
@@ -58,8 +57,8 @@ public class UDPServerThread implements Runnable{
         if(socket!=null && !socket.isClosed())
             socket.close();
         socket = new DatagramSocket(port);
-        String msg = "port%" + MainClass.mainUser.getUsername() + "%" + MainClass.mainUser.getPort();
-        String response = MainClass.helper.sendToServer(MainClass.helper.getServerIP(), MainClass.helper.getServerPort(), msg);
+        String msg = "port%" + MainClass.mainUser.getUsername() + "%" + MainClass.mainUser.getUDPServerPort();
+        String response = MainClass.helper.sendToServer(MainClass.mainUser.getTCPServerIP(), MainClass.mainUser.getTCPServerPort(), msg);
         System.out.println(response);
     }
 }

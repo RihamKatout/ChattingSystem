@@ -1,6 +1,7 @@
 package com.client.p2pclient;
 
 import java.io.*;
+import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -26,11 +27,22 @@ public class Helper {
     private void setServerPort(int serverPort) {
         this.serverPort = serverPort;
     }
+    public ServerSocket createValidSocket() throws IOException {
+        for(int ports = 1 ; ports <= 9999; ports++) {
+            try {
+                ServerSocket tmp = new ServerSocket(ports);
+                return tmp;
+            } catch (IOException ex) {
+                continue;
+            }
+        }
+        return null ;
+    }
 
     private Socket createSocket(String serverIP, int serverPort) throws IOException {
         setServerIP(serverIP);
         setServerPort(serverPort);
-        TCPSocket = new Socket(getServerIP(), getServerPort());
+        TCPSocket = new Socket(MainClass.mainUser.getTCPServerIP(), MainClass.mainUser.getTCPServerPort());
         return TCPSocket;
     }
     public static  String reader(InputStream inputStream) throws IOException {

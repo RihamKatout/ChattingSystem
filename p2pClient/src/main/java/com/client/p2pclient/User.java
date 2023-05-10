@@ -23,13 +23,14 @@ public class User {
 
     private int TCPServerPort;
     private UDPServerThread UDPServer;
-    private int onlineServerPort, port;
+    private int onlineServerPort, UDPServerPort;
+
     private onlineStatusThread onlineThread ;
 
     User() throws SocketException, UnknownHostException {
         IP = username = null;
         UDPServer = null;
-        port = 0 ;
+        UDPServerPort = 0 ;
     }
     public void setUsername(String username) {
         this.username = username;
@@ -43,13 +44,13 @@ public class User {
     public String getIP() {
         return IP;
     }
-    public void setPort(int noPort) throws IOException {
+    public void setUDPServerPort(int noPort) throws IOException {
         for(int ports = 1 ; ports <= 9999; ports++){
             try {
                 DatagramSocket tmp = new DatagramSocket(ports);
                 tmp.close();
                 if(ports==noPort)continue;
-                this.port = ports;
+                this.UDPServerPort = ports;
                 return;
             } catch (IOException ex) {
                 continue;
@@ -57,8 +58,8 @@ public class User {
         }
         throw new IOException("no free port found");
     }
-    public int getPort() {
-        return port;
+    public int getUDPServerPort() {
+        return UDPServerPort;
     }
     public void setTCPServerIP(String TCPServerIP) {
         this.TCPServerIP = TCPServerIP;
@@ -66,15 +67,22 @@ public class User {
     public void createUDPThread() throws IOException {
         int noPort = 0;
         if(UDPServer != null && !UDPServer.getSocket().isClosed()){
-            noPort = getPort();
+            noPort = getUDPServerPort();
             UDPServer.getSocket().close();
         }
         UDPServer = new UDPServerThread();
-        setPort(noPort);
-        UDPServer.setPort(port);
+        setUDPServerPort(noPort);
+        UDPServer.setPort(UDPServerPort);
         Thread thread = new Thread(UDPServer);
         thread.start();
         System.out.println("UDP created successfully");
+    }
+    public onlineStatusThread getOnlineThread() {
+        return onlineThread;
+    }
+
+    public void setOnlineThread(onlineStatusThread onlineThread) {
+        this.onlineThread = onlineThread;
     }
     public UDPServerThread getUDPServer(){
         return UDPServer;
@@ -87,7 +95,7 @@ public class User {
         return onlineServerPort;
     }
     public boolean equals(User user2) {
-        return IP.equals(user2.getIP()) && port==(user2.getPort());
+        return IP.equals(user2.getIP()) && UDPServerPort ==(user2.getUDPServerPort());
     }
 
 }

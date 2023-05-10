@@ -21,8 +21,7 @@ public class onlineStatusThread implements Runnable {
     }
 
     public void setWelcomeSocket() throws IOException {
-
-        //this.welcomeSocket = Helper.createSocket();
+        this.welcomeSocket = MainClass.helper.createValidSocket();
         MainClass.mainUser.setOnlineServerPort(welcomeSocket.getLocalPort());
     }
     @Override
@@ -32,18 +31,26 @@ public class onlineStatusThread implements Runnable {
                 OutputStream outputStream;
                 try {
                     connectionSocket = welcomeSocket.accept();
+                    System.out.println("updates on online users !");
                     outputStream = connectionSocket.getOutputStream();
                     InputStream inputStream = connectionSocket.getInputStream();
-//                    System.out.println("hello");
                     String onlineUsers = Helper.reader(inputStream);
                     System.out.println(onlineUsers);
-                    GUIController.onlineUpdate(onlineUsers);
+                    if(onlineUsers.contains("#deleted")){
+                        String data[] = onlineUsers.split("%");
+                        GUIController.DeleteMessageByID(data[1]);
+                    }
+                    else {
+                        GUIController.onlineUpdate(onlineUsers);
+                        System.out.println("updated");
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 try {
                     String answer = "thanks";
                     outputStream.write(answer.getBytes());
+                    System.out.println("finished update on online users");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

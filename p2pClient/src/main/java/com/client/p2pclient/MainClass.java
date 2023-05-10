@@ -23,20 +23,18 @@ public class MainClass extends Application  {
 
     public static void main(String[] args) throws IOException {
         helper = new Helper();
-        mainUser = new User();
 //        Thread UDPThread = new Thread(new UDPServerThread());
 //        UDPThread.start();
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
-
-                String name = mainUser.getUsername();
-                String serverIP = mainUser.getTCPServerIP();
-                int serverPort = mainUser.getTCPServerPort();
-                String msg = "logout%" + name + "%" + MainClass.mainUser.getIP();
                 try {
+                    String name = mainUser.getUsername();
+                    String serverIP = mainUser.getTCPServerIP();
+                    int serverPort = mainUser.getTCPServerPort();
+                    String msg = "logout%" + name + "%" + MainClass.mainUser.getIP();
                     MainClass.helper.sendToServer(serverIP, serverPort, msg);
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("User Not init");
                 }
             }
         });

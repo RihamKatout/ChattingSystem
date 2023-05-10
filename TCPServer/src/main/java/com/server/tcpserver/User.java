@@ -5,26 +5,35 @@ import java.net.*;
 
 public class User {
     private String username, IP;
-    private int port;
-
+    private int UDPServerPort;
+    private int onlineStatusPort ;
     User(){
         IP = username = null;
-        port = 0 ;
+        UDPServerPort = 0 ;
+        onlineStatusPort = 0 ;
     }
     User(String username){
         this();
         this.username = username;
     }
-    User(String username, String IP){
-        port = 0;
+    User(String username, String IP ){
+        UDPServerPort = 0;
         this.username = username;
         this.IP = IP;
     }
-    User(String username, String IP, int port){
+    User(String username, String IP, int UDPServerPort,int OnlineServerPort){
         this.IP = IP;
-        this.port = port;
+        this.UDPServerPort = UDPServerPort;
         this.username = username;
+        this.onlineStatusPort = OnlineServerPort;
 
+    }
+    public int getOnlineStatusPort() {
+        return onlineStatusPort;
+    }
+
+    public void setOnlineStatusPort(int onlineStatusPort) {
+        this.onlineStatusPort = onlineStatusPort;
     }
     public void setUsername(String username) {
         this.username = username;
@@ -39,10 +48,10 @@ public class User {
         return IP;
     }
     public void setPort(int port){
-        this.port = port;
+        this.UDPServerPort = port;
     }
     public int getPort() {
-        return port;
+        return UDPServerPort;
     }
 
     public boolean equals(User user2) {
