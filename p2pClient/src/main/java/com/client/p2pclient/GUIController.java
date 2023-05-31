@@ -60,6 +60,7 @@ public class GUIController implements Initializable {
         updateButton.setDisable(false);
         sendAllButton.setDisable(false);
         DeleteMessegeButton.setDisable(false);
+        DeleteAllButton.setDisable(false);
     }
     private void logoutEnable(){
         usernameTestBox.setDisable(false);
@@ -76,6 +77,7 @@ public class GUIController implements Initializable {
         updateButton.setDisable(true);
         sendAllButton.setDisable(true);
         DeleteMessegeButton.setDisable(true);
+        DeleteAllButton.setDisable(true);
     }
     private void clearAll(){
         messageBox.setText("");
@@ -150,7 +152,6 @@ public class GUIController implements Initializable {
                 Label label = (Label) message;
                 MainClass.helper.sendToServer(ServerIP.getText() , Integer.parseInt(ServerPort.getText()),"delete%"+label.getId());
 //                    DeleteMessageByID(label.getId());
-                break;
 
             }
         }

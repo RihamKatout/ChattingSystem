@@ -211,6 +211,11 @@
             </TextArea>
             <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="20.0">
                <children>
+                  <Button fx:id="DeleteAllButton" disable="true" mnemonicParsing="false" onAction="#DeleteAll" prefHeight="46.0" prefWidth="70.0" text="Delete all" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="DeleteMessegeButton" disable="true" mnemonicParsing="false" onAction="#DeleteMessage" prefHeight="46.0" prefWidth="192.0" text="Delete selected message" textFill="RED">
                      <font>
                         <Font size="15.0" />
